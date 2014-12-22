@@ -1,0 +1,20 @@
+@import 'elements.less';
+
+/*colors*/
+@border-gray: #E1E8ED;
+@placeholder-text: lightgrey;
+
+.red { background-color: red; }
+.green { background-color: green;}
+.display { display: inherit;}
+::-webkit-input-placeholder, :-moz-placeholder, ::-moz-placeholder, :-ms-input-placeholder { color: @placeholder-text;  }
+
+search-listings, listing-page, user-page, post-listing { 
+	display: none;
+}
+
+post-listing {
+    .listOptions {
+        margin-top: 10px;
+    }
+}
