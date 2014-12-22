@@ -16,7 +16,7 @@ require './middleware/error_handling.rb'
 require './db/mongo'
 require './users/user'
 require './users/users_api'
-require './current_user/current_user_api'
+# require './current_user/current_user_api'
 
 get '/' do 
 	send_file File.join(settings.public_folder, 'index.html')

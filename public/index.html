@@ -11,9 +11,7 @@
     <script> less = { logLevel: 2 }</script>
     <script src="/js/lib/less.min.js"></script> 
 
-<style>
-.col-md-4 { border: 1px solid lightblue;}
-</style>    
+
 </head>
 
 <body>
@@ -22,70 +20,66 @@
 
         <post-listing class="row display">
             <form>            
-                <div class="row">                    
-                    <div class="col-md-4 col-md-offset-4"><div>ClassyPie</div></div>                   
-                </div>
+                <div class="col-md-3"></div>
+                    <div class="col-md-2"><h1>ClassyPie</h1></div>                   
+                <div class="col-md-7"></div>
+                
 
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                            <label for="title">Title :</label>
+                    <div class="col-md-6 col-md-offset-3">                            
                             <div class="input-group">                        
-                                <span class="input-group-addon"> @ </span>
-                                <input type="text" name="title" class="form-control" placeholder="Username">
+                                <span class="input-group-addon"> I'm looking for </span>
+                                <input type="text" name="title" class="form-control" placeholder="a plumber">
                             </div>
                     </div>
                 </div>
 
-                <div class="row listOptions">
+                <div class="row optionsRow">
                     <div class="col-md-3"></div>                                        
                     <div class="col-md-2">                        
                         <div class="input-group">                        
                                 <span class="input-group-addon">Where?</span>
-                                <input type="text" name="where" class="form-control">
+                                <input type="text" name="where" class="form-control" value="Barcelona">
                         </div>
                     </div>
 
                     <div class="col-md-2">                        
                         <div class="input-group">                        
                                 <span class="input-group-addon">When?</span>
-                                <input type="text" name="when" class="form-control">
+                                <input type="text" name="when" class="form-control" value="12/25/14">
                         </div>
                     </div>
 
                     <div class="col-md-2">                        
                         <div class="input-group">                        
                                 <span class="input-group-addon">For About</span>
-                                <input type="text" name="for_about" class="form-control">
+                                <input type="text" name="for_about" class="form-control" value='flexible'>
                                  <span class="input-group-addon">$</span>
                         </div>
                     </div>
                     <div class="col-md-7"></div>                                        
                 </div>
+                  
+                <div class="row optionsRow">  
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Details</span>
+                            <textarea class="form-control custom-control" rows="4" style="resize:none"></textarea> 
+                        </div>
+                    </div>         
+                </div>       
 
-                <div class="row">
-                    <div class="col-md-3"></div>                                        
-                    <div class="col-md-5">                                                
-                        <input class="form-control" id="when">
-                    </div>
-                    <div class="col-md-4"></div>                                        
-                </div>
+                <div class="row optionsRow">  
+                    <div class="col-md-6 col-md-offset-3">                            
+                            <div class="input-group">                        
+                                <span class="input-group-addon">Let me know at</span>
+                                <input type="email" name="email" class="form-control" placeholder="you@gmail.com or @yourTwitter">
+                                <span class="input-group-btn"><button class="btn btn-primary" type="button">Submit</button></span>
+                            </div>
+                    </div>     
+                </div>       
 
-                    <!-- <div class="col-md-4">
-                        <label for="when">When?</label>
-                        <input class="form-control-small" id="when">
-                    </div>
 
-                    <div class="col-md-2">
-                        <label for="amount">For about:</label>
-                        <input class="form-control-small" id="amount">
-                    </div>
-                    <div class="col-md-3"></div> -->
-                
-
-                <div class="col-md-4">
-                    <label for="details">Details :</label>
-                    <textarea class="form-control" rows="5" id="details"></textarea>
-                </div>                
             </form>
         </post-listing>
 
