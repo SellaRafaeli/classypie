@@ -10,7 +10,9 @@
     
     <script> less = { logLevel: 2 }</script>
     <script src="/js/lib/less.min.js"></script> 
-
+<style>
+listing-page div { border: 1px solid red;}
+</style>
 
 </head>
 
@@ -18,13 +20,12 @@
 
     <container class="container">
 
-        <post-listing class="row display">
-            <form>            
+        <post-listing class="full-page row display">
+            <form id="postForm">            
                 <div class="col-md-3"></div>
                     <div class="col-md-2"><h1>ClassyPie</h1></div>                   
                 <div class="col-md-7"></div>
                 
-
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">                            
                             <div class="input-group">                        
@@ -64,7 +65,7 @@
                     <div class="col-md-6 col-md-offset-3">
                         <div class="input-group">
                             <span class="input-group-addon">Details</span>
-                            <textarea class="form-control custom-control" rows="4" style="resize:none"></textarea> 
+                            <textarea name=details class="form-control custom-control" rows="4" style="resize:none"></textarea> 
                         </div>
                     </div>         
                 </div>       
@@ -73,8 +74,10 @@
                     <div class="col-md-6 col-md-offset-3">                            
                             <div class="input-group">                        
                                 <span class="input-group-addon">Let me know at</span>
-                                <input type="email" name="email" class="form-control" placeholder="you@gmail.com or @yourTwitter">
-                                <span class="input-group-btn"><button class="btn btn-primary" type="button">Submit</button></span>
+                                <input type="email" name="contact" class="form-control" placeholder="you@gmail.com or @yourTwitter">
+                                <span class="input-group-btn">
+                                    <button id="submitListing" class="btn btn-primary" type="button" jab-click=submit>Submit</button>
+                                </span>
                             </div>
                     </div>     
                 </div>       
@@ -83,7 +86,7 @@
             </form>
         </post-listing>
 
-        <user-page class="row">
+        <user-page class="full-page row">
             <div class="col-md-4"><p>User page results </p></div>
             <div class="col-md-4"><p>User page </p></div>
             <div class="col-md-4"><p>User page </p></div>
@@ -92,16 +95,28 @@
             <div class="col-md-4"><p>User page 2</p></div>
         </user-page>
 
-        <listing-page class="row">
-            <div class="col-md-4"><p>View listings results </p></div>
-            <div class="col-md-4"><p>View listings </p></div>
-            <div class="col-md-4"><p>View listings </p></div>
-            <div class="col-md-4"><p>View listings 0</p></div>
-            <div class="col-md-4"><p>View listings 1</p></div>
-            <div class="col-md-4"><p>View listings 2</p></div>
-        </view-listing>
+        <listing-page id="listing-page" class="full-page row">
+            <listing-details>
+                <div class="col-md-12"><p name=title></p></div>
+                <div class="col-md-12"><p name=where></p></div>
+                <div class="col-md-12"><p name=when></p></div>
+                <div class="col-md-12"><p name=for_about></p></div>
+                <div class="col-md-12"><p name=details></p></div>
+                <div class="col-md-12"><p name=contact></p></div>            
+            </listing-details>
+            
+            <offers>
+                <div name=offers>
+                    <span name=name></span>
+                </div>
+            </offers>
+            
+            <form>
+                <button id="submitOffer" jab-click=submitOffer type="button" class="btn btn-primary">Submit Offer</button>
+            </form>
+        </listing-page>
 
-        <search-listings class="row">
+        <search-listings class="full-page row">
             <div class="col-md-4"><p>Search listings results </p></div>
             <div class="col-md-4"><p>Some text </p></div>
             <div class="col-md-4"><p>Some text </p></div>
@@ -117,5 +132,7 @@
     <script src="/js/lib/jab.js"></script>     
     <script src="/js/lib/jquery2.1.3.min.js"></script>
     <script src="/js/lib/lodash.min.js"></script>
-    <script> console.log("downloaded all"); </script>
+    <!-- end libs -->        
+
+    <script src="/js/app.js"></script>     
 </html>
