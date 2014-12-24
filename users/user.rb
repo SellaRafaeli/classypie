@@ -1,4 +1,4 @@
-$users = $db.collection('users')
+$users = $mongo.collection('users')
 $users.ensure_index( { username: 1 }, { unique: true } )
 
 module User

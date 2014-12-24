@@ -11,7 +11,6 @@ gem 'bson_ext', 						'1.11.1' # helps mongo performance
 gem 'rack-parser', 		      '0.6.0' # rack middleware
 gem 'bcrypt', 					    '3.1.7' # encryption for user passwords
 gem 'activesupport',      	'4.0.0' # utility functions like hash.slice
-gem 'bower',                '0.0.2' # for frontend asset management
+#gem 'random-word',          '1.3.0' # for random words for testing
+#gem 'bower',                '0.0.2' # for frontend asset management
 
-gem 'quickbooks-ruby',      '0.1.5'
-gem 'quickbooks-ruby-base', '1.0.1' # helps with serialization. I think.

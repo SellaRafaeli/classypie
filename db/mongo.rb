@@ -2,7 +2,7 @@ include Mongo
 
 # Instantiate and connect to the production MongoLab database if production, or
 # a local instance if development.
-$db = CONN = MongoClient.from_uri(settings.mongodb_uri).db(settings.mongodb_db_name)
+$mongo = CONN = MongoClient.from_uri(settings.mongodb_uri).db(settings.mongodb_db_name)
 puts "Running against MongoDB: #{settings.mongodb_uri} db:#{settings.mongodb_db_name}"
 
 # Custom methods to make dealing with Mongo object ids easier.

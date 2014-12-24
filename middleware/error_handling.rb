@@ -3,5 +3,6 @@ not_found do
 end
 
 error do
-	{status: 500, msg: "Error", custom: "adamantium-45"}
+  e = env['sinatra.error']
+  {status: 500, msg: e.to_s, custom: "barrium-1776", backtrace: e.backtrace.to_a.slice(0,4).to_s}
 end

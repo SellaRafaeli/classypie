@@ -1,33 +1,53 @@
 //multi-page
-function showPage(pageName) { $('.full-page').hide(); $(pageName).show(); }
+function runByURL() { 
+    var pageName = document.location.pathname.split('/')[1];
 
-//form page
-form = {
-    title: 'default title',
-    where: 'Paris',
-    when: '12/25/14',
-    for_about: '20',
-    details: 'some details',
-    contact: 'bob@email.com',
-    submit: function() { 
-        renderListingPage(form)    
-    }
-};    
-
-function buildFormPage(){    
-    jab.bindObj(form,"#postForm");
+    if      (pageName == 'user')    buildUserPage();
+    // else if (pageName == 'listing') buildListingPage();
+    else if (pageName == 'search')  buildSearchPage();
+    else                            buildFormPage();
 }
 
-//listing page
-listing = {};
-function renderListingPage(data) {
-    listing = data; 
-    listing.offers = listing.offers || [{name: 'Joe'}, {name: 'Bob'}]; 
-    listing.submitOffer = function() { listing.offers.push({name: 'new offer'}) };
-    jab.bindObj(listing,"#listing-page");
-    showPage('listing-page');
+//form page
+function buildFormPage(){
+    var path = '/listing/create';
+    var form = $("#postForm");
+
+    formData = function() { return form.serializeObject(); }
+    
+    form.submit(function() {   
+        $.post(path, formData())
+         .success(function(res) { document.location.href = '/listing/'+res} );
+    })
+    
+    buildOffers();    
+}
+
+function buildOffers(){
+    offers = {};
+    offers.name='nunchucks';
+    offers.offersList = [];
+
+    offers.addOffer = function() {
+        //submitOfferToServer();
+        offers.getAll();    
+    }    
+    offers.getAll = function(){
+        $.getJSON('/offers/123').success(function(res){offers.offersList = res;})    
+    }
+
+    jab.bindObj(offers,"offersArea");    
+    offers.getAll();
+}
+
+function buildListingPage() {
+    console.log("In user page");
+}
+
+function buildUserPage() {
+    console.log("In user page");
 }
 
 //run
-buildFormPage();
-$('#submitListing').click();
+runByURL();
+//$('#submitListing').click();
