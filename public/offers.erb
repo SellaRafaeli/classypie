@@ -1,0 +1,30 @@
+<h1>Offers</h1>
+<style>
+.offer { border: 1px solid blue;}
+</style>
+  
+  <offersArea>
+      <div id="newOffer" class="col-md-12">
+          <form>
+                <div class="input-group">                        
+                    <span class="input-group-addon">Name/website/facebook page</span>
+                    <input type="text" name="name" class="form-control" placeholder="Your name">
+                </div>
+
+                <div class="input-group">                        
+                    <span class="input-group-addon">Anything else?</span>
+                    <textarea name="details" class="form-control" placeholder="Convince the customer to pick you! Add your offer, details about you, your personal phone number - whatever"></textarea>
+                </div>
+                <button type='button' class="input-group" jab-click='addOffer'>Submit</button>
+          </form>
+      </div>
+    
+      <div class="col-md-12">
+          <offers class='col-md-12'>
+              <div name=offersList class='offer col-md-4'>
+                  <p>Name: <span name=name></span> </p>
+                  <p>Contact: <span name=contact></span></p>
+              </div>          
+          </offers>
+      </div>
+  <offersArea>

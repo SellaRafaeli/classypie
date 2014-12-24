@@ -10,14 +10,14 @@ function runByURL() {
 
 //form page
 function buildFormPage(){
-    var path = '/listing/create';
     var form = $("#postForm");
 
-    formData = function() { return form.serializeObject(); }
-    
+    var formData = function() { return form.serializeObject(); }
+    listingID = formData().id;
+
     form.submit(function() {   
-        $.post(path, formData())
-         .success(function(res) { document.location.href = '/listing/'+res} );
+        $.post('/listing/create_or_update', formData())
+         .success(function(res) { document.location.href = '/listing/'+res} ).error(genError);
     })
     
     buildOffers();    
@@ -33,7 +33,7 @@ function buildOffers(){
         offers.getAll();    
     }    
     offers.getAll = function(){
-        $.getJSON('/offers/123').success(function(res){offers.offersList = res;})    
+        $.getJSON('/offers/by_listing/'+listingID).success(function(res){offers.offersList = res;})    
     }
 
     jab.bindObj(offers,"offersArea");    

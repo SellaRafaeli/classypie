@@ -1,0 +1,26 @@
+        <listing-page id="listing-page" class="full-page row">
+            <listing-details>
+                <div class="col-md-12"><p>I need a...</p></div>
+                <div class="col-md-4"><p name=title> <%= @title %>   </p></div>
+                <div class="col-md-4"><p name=where> <%= @where %>  </p></div>
+                <div class="col-md-4"><p name=when>  <%= @when %>  </p></div>
+                <div class="col-md-4"><p name=for_about> <%= @for_about %>            </p></div>
+                <div class="col-md-4"><p name=details> <%= @details %>              </p></div>
+                <div class="col-md-4"><p name=contact> <%= @contact %>             </p></div>            
+            </listing-details>
+            
+            <offers>
+                <div name=offers class='col-md-4'>
+                    <p>Name: <span name=name></span> </p>
+                    <p>Contact: <span name=contact></span></p>
+                </div>
+            </offers>
+            
+            <form>
+                <button id="submitOffer" jab-click=submitOffer type="button" class="btn btn-primary">Submit Offer</button>
+            </form>
+        </listing-page>
+
+<style>
+listing-page div { border: 1px solid red;}
+</style>

@@ -11,12 +11,9 @@ Bundler.require
 # our app files - export to separate require.rb file when grows out of hand
 require './lib/mylib'
 require './settings'
-require './middleware/middleware_incoming'
-require './middleware/middleware_outgoing'
-require './middleware/error_handling.rb'
 require './db/mongo'
-#require './listings/'
-require './bl/listings.rb'
+require_all './bl'
+require_all './middleware'
 require './users/user'
 require './users/users_api'
 
@@ -29,22 +26,16 @@ get '/listing/:id/?:name?' do
   erb :index, layout: :layout
 end
 
-get '/listing/num' do  
-
+post '/listing/create' do 
+  Listings.create(params)
 end
 
-post '/listing/create_or_update' do 
-  Listings.create_or_update(params)
+post '/offers/create' do
+  Offers.create(params)
 end
 
-get '/offers/:listingID' do
-  [{name: 'Joe', contact: 'joe@company.biz'}, {name: 'Jane', contact: 'jane@help.com'},
-    {name: 'Joe2', contact: 'joe@company.biz'}, {name: 'Jane2', contact: 'jane@help.com'},
-    {name: 'Joe3', contact: 'joe@company.biz'}, {name: 'Jane3', contact: 'jane@help.com'},
-    {name: 'Joe', contact: 'joe@company.biz'}, {name: 'Jane', contact: 'jane@help.com'},
-    {name: 'Joe2', contact: 'joe@company.biz'}, {name: 'Jane2', contact: 'jane@help.com'},
-    {name: 'Joe3', contact: 'joe@company.biz'}, {name: 'Jane3', contact: 'jane@help.com'}
-    ].to_json
+get '/offers/by_listing/:listing_id' do
+  Offers.by_listing(params.listing_id)
 end
 
 get '/user/:id/?:username?' do
