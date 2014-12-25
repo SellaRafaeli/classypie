@@ -1,9 +1,7 @@
 //multi-page
 function runByURL() { 
     var pageName = document.location.pathname.split('/')[1];
-
     if      (pageName == 'user')    buildUserPage();
-    // else if (pageName == 'listing') buildListingPage();
     else if (pageName == 'search')  buildSearchPage();
     else                            buildFormPage();
 }
@@ -11,33 +9,40 @@ function runByURL() {
 //form page
 function buildFormPage(){
     var form = $("#postForm");
+    var getFormData = function() { return form.toObj() };
+    listingID = getFormData().id;
 
-    var formData = function() { return form.serializeObject(); }
-    listingID = formData().id;
-
-    form.submit(function() {   
-        $.post('/listing/create_or_update', formData())
+    form.submit(function(e) {               
+        $.post('/listing/create', getFormData())
          .success(function(res) { document.location.href = '/listing/'+res} ).error(genError);
+        e.preventDefault();
     })
     
     buildOffers();    
 }
 
 function buildOffers(){
-    offers = {};
-    offers.name='nunchucks';
+    offers = {};    
     offers.offersList = [];
 
+    var newOfferForm = $('#newOfferForm');
+
     offers.addOffer = function() {
-        //submitOfferToServer();
-        offers.getAll();    
+        var newOffer = newOfferForm.toObj();
+        newOffer.listing_id = listingID;
+        $.post('/offers/create', newOffer)
+         .success(function(res) { 
+            newOffer.id = res;
+            offers.offersList.unshift(newOffer);
+        }).error(genError);
     }    
+    
     offers.getAll = function(){
         $.getJSON('/offers/by_listing/'+listingID).success(function(res){offers.offersList = res;})    
     }
 
     jab.bindObj(offers,"offersArea");    
-    offers.getAll();
+    if (listingID) offers.getAll();
 }
 
 function buildListingPage() {

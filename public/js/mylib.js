@@ -7,7 +7,7 @@ function just(from, fieldsArr) {
 function genError(res) { console.log("res"); alert("An error occurred.") }
 
 //http://stackoverflow.com/questions/1184624/convert-form-data-to-js-object-with-jquery
-$.fn.serializeObject = function()
+$.fn.toObj = $.fn.serializeObject = function()
 {
     var o = {};
     var a = this.serializeArray();

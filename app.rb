@@ -46,8 +46,6 @@ get '/search/:id/?:foo?' do
   erb :search, layout: :layout
 end 
 
-
-
 get '/ping' do
 	{msg: 'pong'}
 end

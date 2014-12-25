@@ -1,30 +1,44 @@
-<h1>Offers</h1>
-<style>
-.offer { border: 1px solid blue;}
-</style>
   
   <offersArea>
+      <div class="col-md-12">
+        <h1>Offers</h1>
+      </div>
+      
       <div id="newOffer" class="col-md-12">
-          <form>
+
+          <form id='newOfferForm'>
                 <div class="input-group">                        
-                    <span class="input-group-addon">Name/website/facebook page</span>
+                    <span class="input-group-addon">Who are you?</span>
                     <input type="text" name="name" class="form-control" placeholder="Your name">
                 </div>
 
                 <div class="input-group">                        
-                    <span class="input-group-addon">Anything else?</span>
+                    <span class="input-group-addon">Price</span>
+                    <input type="text" name="price" class="form-control" placeholder="How much will you be charging?">
+                </div>
+
+                <div class="input-group">                        
+                    <span class="input-group-addon">Details</span>
                     <textarea name="details" class="form-control" placeholder="Convince the customer to pick you! Add your offer, details about you, your personal phone number - whatever"></textarea>
                 </div>
+
+                <div class="input-group">                        
+                    <span class="input-group-addon">Contact via</span>
+                    <input name="contact" class="form-control" placeholder="your email/phone"></input>
+                </div>
+
                 <button type='button' class="input-group" jab-click='addOffer'>Submit</button>
           </form>
       </div>
     
       <div class="col-md-12">
           <offers class='col-md-12'>
-              <div name=offersList class='offer col-md-4'>
-                  <p>Name: <span name=name></span> </p>
-                  <p>Contact: <span name=contact></span></p>
+              <div name=offersList class='offer bg-info col-md-4'>
+                  <p>Name: <span name='name'></span> </p>
+                  <p>Price: <span name='price'></span> </p>
+                  <p>Details: <span name='details'></span></p>
+                  <p>Contact: <span name='contact'></span></p>
               </div>          
           </offers>
       </div>
-  <offersArea>
+  </offersArea>
