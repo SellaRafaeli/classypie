@@ -41,9 +41,8 @@ function buildOffers(){
         $.getJSON('/offers/by_listing/'+listingID).success(function(res){offers.offersList = res;})    
     }
 
-    
     if (listingID) {
-        jab.bindObj(offers,"offersArea");    
+        jab.bindObj(offers,"offersArea");            
         offers.getAll();
         $('offersArea').show();
     }
@@ -56,6 +55,35 @@ function buildListingPage() {
 function buildUserPage() {
     console.log("In user page");
 }
+
+//current user area 
+function signup() {
+    var email = prompt('What is your email?');
+    $.post('/signup', {email: email}).success(function(res){ current_user.markLoggedIn(email)}).error(genError)        
+}
+
+function logout() {
+    $.post('/logout').success(function(res){current_user.markLoggedIn(false)}).error(genError);
+}
+
+current_user = {};
+loginBtn             = $('#loginBtn');
+logoutBtn            = $('#logoutBtn');
+currentUserEmailArea = $('#currentUserEmail');
+currentUserEmail = currentUserEmailArea.text();
+
+current_user.markLoggedIn = function(email) {
+    loginBtn.hide(); logoutBtn.hide();
+    if (email) {        
+        logoutBtn.show();
+        currentUserEmailArea.text(email);    
+    } else {
+        loginBtn.show();
+        currentUserEmailArea.text('');
+    }
+}
+
+current_user.markLoggedIn(currentUserEmailArea.text());
 
 //run
 runByURL();

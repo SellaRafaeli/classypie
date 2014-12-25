@@ -17,11 +17,19 @@ require_all './middleware'
 require './users/user'
 require './users/users_api'
 
-get '/login' do
 
+
+post '/signup' do
+  user         = $users.add(params)  
+  session.user_id = user._id
 end
 
-get '/logout' do
+get '/me' do
+  $users.get(session.user_id)
+end
+
+post '/logout' do
+  session.clear
 end
 
 get '/' do 
@@ -45,13 +53,13 @@ get '/offers/by_listing/:listing_id' do
   Offers.by_listing(params.listing_id)
 end
 
-get '/user/:id/?:username?' do
-  erb :user, layout: :layout
-end
+# get '/user/:id/?:username?' do
+#   erb :user, layout: :layout
+# end
 
-get '/search/:id/?:foo?' do 
-  erb :search, layout: :layout
-end 
+# get '/search/:id/?:foo?' do 
+#   erb :search, layout: :layout
+# end 
 
 get '/ping' do
 	{msg: 'pong'}

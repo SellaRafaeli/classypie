@@ -29,6 +29,7 @@ class Mongo::Collection
 	def add(doc)
 		doc[:_id] = nice_id
 		self.insert(doc)
+		doc
 	end
 
 	def update_id(_id, fields)

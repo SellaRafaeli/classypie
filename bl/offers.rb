@@ -4,7 +4,7 @@ module Offers
   extend self
 
   def create(params)
-    id = $offers.add(params)  
+    id = $offers.add(params)._id
   end
 
   def by_listing(id)
