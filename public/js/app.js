@@ -41,8 +41,12 @@ function buildOffers(){
         $.getJSON('/offers/by_listing/'+listingID).success(function(res){offers.offersList = res;})    
     }
 
-    jab.bindObj(offers,"offersArea");    
-    if (listingID) offers.getAll();
+    
+    if (listingID) {
+        jab.bindObj(offers,"offersArea");    
+        offers.getAll();
+        $('offersArea').show();
+    }
 }
 
 function buildListingPage() {

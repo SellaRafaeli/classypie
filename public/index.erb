@@ -54,14 +54,14 @@
                     <div class="col-md-12">                                                    
                             <div class="input-group">                        
                                 <span class="input-group-addon">Let me know at</span>
-                                <input type="email" name="contact" class="form-control" placeholder="you@gmail.com or @yourTwitter" value='<%=@listing.contact%>'>
-                                <span class="input-group-btn">
+                                <input type="email" name="contact" class="form-control" placeholder="you@gmail.com or @yourTwitter" value='<%=@listing.contact%>'>                     
                                     <% if !@listing._id %>
-                                    <button id="submitListing" class="btn btn-primary">
-                                        Submit
-                                    </button>
-                                    <% end %>
-                                </span>
+                                    <span class="input-group-btn">
+                                        <button id="submitListing" class="btn btn-primary">
+                                            Submit
+                                        </button>
+                                    </span>
+                                    <% end %>                                
                             </div>
                     </div>     
                 </div>       

@@ -17,6 +17,13 @@ require_all './middleware'
 require './users/user'
 require './users/users_api'
 
+get '/login' do
+
+end
+
+get '/logout' do
+end
+
 get '/' do 
   erb :index, layout: :layout
 end
