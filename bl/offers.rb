@@ -8,6 +8,6 @@ module Offers
   end
 
   def by_listing(id)
-    $offers.find_all(listing_id: id).to_a.to_json
+    $offers.find_all(listing_id: id).to_a
   end
 end

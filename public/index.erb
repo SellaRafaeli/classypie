@@ -1,28 +1,18 @@
-<% 
-    @listing = @listing || {} 
-%>
-  
+
     <div class="col-md-12">
         <div class="col-md-3"></div>
         <post-listing class="col-md-6">            
             <form id="postForm">            
                 <div class="row">
-                    <input type="hidden" name="id" value='<%=@listing._id%>'>
+                    <input type="hidden" name="id" value='<%=listing._id%>'>
                     <div class="col-md-2 col-offset-5"><h1><a href="/">ClassyPie</a></h1></div>                    
                 </div>
-                
-                <!-- <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" id='logoutBtn' class="btn btn-small btn-info invi" onclick='logout()'>Logout</button>
-                        <button type="button" id='loginBtn' class="btn btn-small btn-info invi" onclick='signup()'>Login</button>
-                    </div>
-                </div> -->
-
+           
                 <div class="row">
                     <div class="col-md-12">                            
                             <div class="input-group">                        
                                 <span class="input-group-addon">I'm looking for</span>
-                                <input type="text" name="title" class="form-control" placeholder="a plumber" value='<%=@listing.title%>'>
+                                <input type="text" name="title" class="form-control" placeholder="a plumber" value='<%=listing.title%>'>
                             </div>
                     </div>
                 </div>
@@ -31,21 +21,21 @@
                     <div class="col-md-4">                        
                         <div class="input-group">                        
                                 <span class="input-group-addon">Where?</span>
-                                <input type="text" name="where" class="form-control" value="<%=@listing.where %>">
+                                <input type="text" name="where" class="form-control" value="<%=listing.where %>">
                         </div>
                     </div>
 
                     <div class="col-md-4">                        
                         <div class="input-group">                        
                                 <span class="input-group-addon">When?</span>
-                                <input type="text" name="when" class="form-control" value="<%=@listing.when%>">
+                                <input type="text" name="when" class="form-control" value="<%=listing.when%>">
                         </div>
                     </div>
 
                     <div class="col-md-4">                        
                         <div class="input-group">                        
                                 <span class="input-group-addon">For About</span>
-                                <input type="text" name="for_about" class="form-control" value='<%=@listing.for_about%>'>
+                                <input type="text" name="for_about" class="form-control" value='<%=listing.for_about%>'>
                                 <span class="input-group-addon">$</span>
                         </div>
                     </div>                    
@@ -55,7 +45,7 @@
                     <div class="col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon">Details</span>
-                            <textarea name=details class="form-control custom-control" rows="4" style="resize:none"><%=@listing.details%></textarea> 
+                            <textarea name=details class="form-control custom-control" rows="4" style="resize:none"><%=listing.details%></textarea> 
                         </div>
                     </div>         
                 </div>       
@@ -64,8 +54,8 @@
                     <div class="col-md-12">                                                    
                             <div class="input-group">                        
                                 <span class="input-group-addon">Let me know at</span>
-                                <input type="email" name="contact" class="form-control" placeholder="you@gmail.com or @yourTwitter" value='<%=@listing.contact || @user_email%>'>                     
-                                    <% if !@listing._id %>
+                                <input type="email" name="contact" class="form-control" placeholder="you@gmail.com or @yourTwitter" value='<%= listing.contact || @user_email%>'>                     
+                                    <% if !listing._id %>
                                     <span class="input-group-btn">
                                         <button id="submitListing" class="btn btn-primary">
                                             Submit
@@ -81,6 +71,6 @@
         <div class="col-md-3"></div>
     </div> <!-- end form -->
         
-    <%= erb :offers %>
+    <%= erb :offers, locals: locals %>
         
     

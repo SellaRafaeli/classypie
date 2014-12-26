@@ -4,6 +4,7 @@ module Listings
   extend self
 
   def create(params)
-    id = $listings.add(params)._id
+    data = params.merge!({created_at: Time.now, updated_at: Time.now, num_views: 0})
+    id = $listings.add(data)._id
   end
 end

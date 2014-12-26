@@ -22,30 +22,16 @@ function buildFormPage(){
 }
 
 function buildOffers(){
-    offers = {};    
-    offers.offersList = [];
+    offers = {};        
 
     var newOfferForm = $('#newOfferForm');
 
     offers.addOffer = function() {
         var newOffer = newOfferForm.toObj();
         newOffer.listing_id = listingID;
-        $.post('/offers/create', newOffer)
-         .success(function(res) { 
-            newOffer.id = res;
-            offers.offersList.unshift(newOffer);
-        }).error(genError);
-    }    
-    
-    offers.getAll = function(){
-        $.getJSON('/offers/by_listing/'+listingID).success(function(res){offers.offersList = res;})    
-    }
-
-    if (listingID) {
-        jab.bindObj(offers,"offersArea");            
-        offers.getAll();
-        $('offersArea').show();
-    }
+        $.post('/offers/create', newOffer).success(function(res) { 
+            document.location.reload();}).error(genError);
+    }        
 }
 
 function buildListingPage() {
@@ -74,7 +60,7 @@ currentUserEmail = currentUserEmailArea.text();
 
 current_user.markLoggedIn = function(email) {
     loginBtn.hide(); logoutBtn.hide();
-    if (email) {        
+    if (email.trim()) {        
         logoutBtn.show();
         currentUserEmailArea.text(email);    
     } else {

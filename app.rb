@@ -5,6 +5,7 @@ require 'sinatra/reloader' #dev-only
 require 'active_support/core_ext/hash/slice'
 require 'json' 
 require 'erb'
+require 'securerandom'
 
 Bundler.require
 
@@ -17,7 +18,21 @@ require_all './middleware'
 require './users/user'
 require './users/users_api'
 
+def locals
+  listing = $listings.get(params.id) || {}  
+  user    = (id = session.user_id) ? $users.get(id) : nil
+  
+  {listing: listing, 
+   user: user, 
+   user_email: user && user.email, 
+   user_id: user && user._id,
+   uuid: cookies.uuid
+  }
+end
 
+def user_ids
+  {user_id: session.user_id, uuid: cookies.uuid}
+end
 
 post '/signup' do
   user         = $users.add(params)  
@@ -29,29 +44,28 @@ get '/me' do
 end
 
 post '/logout' do
-  session.clear
+  session.user_id = nil
 end
 
 get '/' do 
-  erb :index, layout: :layout
+  erb :index, layout: :layout, locals: locals
 end
 
-get '/listing/:id/?:name?' do
-  @listing = $listings.get(params.id) || {}  
-  erb :index, layout: :layout
+get '/listing/:id/?:name?' do  
+  erb :index, layout: :layout, locals: locals
 end
 
 post '/listing/create' do 
-  Listings.create(params)
+  Listings.create(params.merge!(user_ids))
 end
 
 post '/offers/create' do
-  Offers.create(params)
+  Offers.create(params.merge!(user_ids))
 end
 
-get '/offers/by_listing/:listing_id' do
-  Offers.by_listing(params.listing_id)
-end
+# get '/offers/by_listing/:listing_id' do
+#   Offers.by_listing(params.listing_id)
+# end
 
 # get '/user/:id/?:username?' do
 #   erb :user, layout: :layout

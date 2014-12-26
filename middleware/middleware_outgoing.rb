@@ -3,6 +3,8 @@ after do
 		content_type 'application/json'
     @response.body = @response.body.to_json		
 	end
+
+	set_cookie(UUID_COOKIE,  SecureRandom.uuid, expires: Time.now+60*60*24*365) if !cookies[UUID_COOKIE]
 end
 
 def set_cookie(key, value, opts = {})
@@ -10,7 +12,7 @@ def set_cookie(key, value, opts = {})
 									path: '/',
 								  domain: ($prod ? request.host : ''), #localhost domain must be nil or browser won't save cookies.									
 									httponly: true,
-									expires: Time.now+60*60*4, #will be in gmtime,
+									expires: Time.now+60*60*4, 
 									}
 
 	final_opts = default_opts.merge!(opts)
