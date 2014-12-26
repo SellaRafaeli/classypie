@@ -56,7 +56,8 @@ get '/listing/:id/?:name?' do
 end
 
 post '/listing/create' do 
-  Listings.create(params.merge!(user_ids))
+  res = Listings.create(params.merge!(user_ids))
+  res.id+'/'+res.url_title
 end
 
 post '/offers/create' do
