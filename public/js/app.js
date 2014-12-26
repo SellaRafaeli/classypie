@@ -74,3 +74,15 @@ current_user.markLoggedIn(currentUserEmailArea.text());
 //run
 runByURL();
 //$('#submitListing').click();
+
+function fillRandomListingVals() {
+    var gr = getRandomName;
+    objToForm($("#postForm"),{title: gr(), where: gr(), 
+                              when: gr(), for_about: gr(), 
+                              details: gr(), contact: 'me@hello.com'});
+}
+
+Mousetrap.bind(['command+k'], function(e) {
+    fillRandomListingVals();
+    return false;
+});

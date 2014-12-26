@@ -23,3 +23,30 @@ $.fn.toObj = $.fn.serializeObject = function()
     });
     return o;
 };
+
+//http://stackoverflow.com/questions/7298364/using-jquery-and-json-to-populate-forms
+function objToForm(form, data) {   
+    $.each(data, function(key, value){  
+    var $ctrl = $('[name='+key+']', form);  
+    switch($ctrl.attr("type"))  
+    {  
+        case "text" :   
+        case "hidden":  
+        $ctrl.val(value);   
+        break;   
+        case "radio" : case "checkbox":   
+        $ctrl.each(function(){
+           if($(this).attr('value') == value) {  $(this).attr("checked",value); } });   
+        break;  
+        default:
+        $ctrl.val(value); 
+    }  
+    });  
+}
+
+function getRandomName(){ 
+    var first = _.sample(["Abe","Bob","Carl","Danny","Eve"]);
+    var last  = _.sample(["Aaronson","Berkeley","Cohen","Davis","Elm"]);
+    var num = _.random(0,1000);
+    return first+" "+last+" "+num;
+}
