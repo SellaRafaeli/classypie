@@ -60,7 +60,7 @@ currentUserEmail = currentUserEmailArea.text();
 
 current_user.markLoggedIn = function(email) {
     loginBtn.hide(); logoutBtn.hide();
-    if (email.trim()) {        
+    if (email && email.trim()) {        
         logoutBtn.show();
         currentUserEmailArea.text(email);    
     } else {
