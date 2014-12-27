@@ -9,9 +9,15 @@ function runByURL() {
 //form page
 function buildFormPage(){
     var form = $("#postForm");
-    var getFormData = function() { return form.toObj() };
-    listingID = getFormData().id;
+    window.addressDetails = {}; //updated by googleMapsAutocomplete
+    var getFormData = function() { 
+        var res = form.toObj(); 
+        res.addressDetails = addressDetails;
+        return res;
+    };
 
+    listingID = getFormData().id;
+    
     form.submit(function(e) {               
         $.post('/listing/create', getFormData())
          .success(function(res) { document.location.href = '/listing/'+res} ).error(genError);
@@ -85,4 +91,9 @@ Mousetrap.bind(['command+k'], function(e) {
     fillFormRandom('#postForm');
     fillFormRandom('#newOfferForm');
     return false;
+});
+
+$(function() {
+    console.log( "ready!" );
+    // $('.datepicker').datepicker();
 });
