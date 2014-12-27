@@ -1,0 +1,16 @@
+Random thoughts.
+
+Use-Cases
+---------
+
+- professional services
+  > plumber, lawyer, painter, car mechanic, carpenter
+
+- non-professional services 
+  > tutor, grocery carrying, babysitter, moving, travel advice 
+
+- establishments 
+  > restaurant, cafe, hotel, zimmer, 
+
+- physical goods 
+  > 1st/2nd hand clothes, electronics, home appliances 
