@@ -21,12 +21,13 @@ require './users/users_api'
 def locals
   listing = $listings.get(params.id) || {}  
   user    = (id = session.user_id) ? $users.get(id) : nil
+  user_id = user && user._id
   
   {listing: listing, 
    user: user, 
    user_email: user && user.email, 
-   user_id: user && user._id,
-   uuid: cookies.uuid
+   user_id: user_id,
+   is_owner: listing.user_id == user_id
   }
 end
 

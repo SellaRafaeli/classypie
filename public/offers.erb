@@ -1,5 +1,4 @@
 <%
-is_owner = (!user_id.nil? && (listing.user_id == user_id)) || (listing.uuid == uuid)
 relevant_offers = all_offers = Offers.by_listing(listing._id) || []
 if !is_owner 
   #get only this user's offers. 
