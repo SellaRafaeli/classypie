@@ -9,4 +9,8 @@ module Listings
     url_title = URI::encode(data.title.gsub(" ","-"))
     {id: id, url_title: url_title}
   end
+
+  def get(id)
+    $listings.get(id)
+  end
 end

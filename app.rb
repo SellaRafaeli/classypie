@@ -19,8 +19,8 @@ require './users/user'
 require './users/users_api'
 
 def locals
-  listing = $listings.get(params.id) || {}  
-  user    = (id = session.user_id) ? $users.get(id) : nil
+  listing = Listings.get(params.id) || {}
+  user    = (id = session.user_id) ? Users.get(id) : nil
   user_id = user && user._id
   
   {listing: listing, 
@@ -36,16 +36,16 @@ def user_ids
 end
 
 def signup_if_new
-  session.user_id = $users.add({email: params.contact})._id if !session.user_id 
+  session.user_id = Users.create({email: params.contact})._id if !session.user_id 
 end
 
 post '/signup' do
-  user         = $users.add(params)  
+  user         = Users.create(params)  
   session.user_id = user._id
 end
 
 get '/me' do
-  $users.get(session.user_id)
+  Users.get(session.user_id)  
 end
 
 post '/logout' do
@@ -75,17 +75,14 @@ post '/offers/addMsg/:offer_id' do
   Messages.create(params.merge!(user_ids))
 end
 
-# get '/offers/by_listing/:listing_id' do
-#   Offers.by_listing(params.listing_id)
-# end
+get '/user/:id/?:name?' do
+  erb :user, layout: :layout, locals: locals
+end
 
-# get '/user/:id/?:username?' do
-#   erb :user, layout: :layout
-# end
-
-# get '/search/:id/?:foo?' do 
-#   erb :search, layout: :layout
-# end 
+post '/user/updateMe' do
+  Users.update(params.merge!(user_ids))  
+  erb :user, layout: :layout, locals: locals
+end
 
 get '/ping' do
 	{msg: 'pong'}
