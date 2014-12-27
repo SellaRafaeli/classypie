@@ -50,11 +50,11 @@ function buildUserPage() {
 //current user area 
 function signup() {
     var email = prompt('What is your email?');
-    $.post('/signup', {email: email}).success(function(res){ current_user.markLoggedIn(email)}).error(genError)        
+    $.post('/signup', {email: email}).success(function(res){ document.location.reload(); }).error(genError)        
 }
 
 function logout() {
-    $.post('/logout').success(function(res){current_user.markLoggedIn(false)}).error(genError);
+    $.post('/logout').success(function(res){ document.location.reload(); }).error(genError);
 }
 
 current_user = {};
@@ -68,7 +68,7 @@ current_user.markLoggedIn = function(email) {
     if (email && email.trim()) {        
         logoutBtn.show();
         currentUserEmailArea.text(email);    
-    } else {
+    } else { //logged-out
         loginBtn.show();
         currentUserEmailArea.text('');
     }

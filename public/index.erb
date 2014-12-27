@@ -49,22 +49,26 @@
                         </div>
                     </div>         
                 </div>       
-
+                
                 <div class="row optionsRow">  
                     <div class="col-md-12">                                                    
                             <div class="input-group">                        
-                                <span class="input-group-addon">Let me know at</span>
-                                <input type="email" name="contact" class="form-control" placeholder="you@gmail.com or @yourTwitter" value='<%= listing.contact || @user_email%>'>                     
-                                    <% if !listing._id %>
-                                    <span class="input-group-btn">
-                                        <button id="submitListing" class="btn btn-primary">
-                                            Submit
-                                        </button>
-                                    </span>
-                                    <% end %>                                
+                                <% if !user_email %>
+                                <span class="input-group-addon">My email</span>
+                                <input type="text" name="contact" class="form-control" placeholder="you@gmail.com">
+                                <% end %>
+
+                                <% if !listing._id %>
+                                <span class="input-group-btn">
+                                    <button id="submitListing" class="btn btn-primary" style='width: 100%'>
+                                        Submit
+                                    </button>
+                                </span>
+                                <% end %>                                
                             </div>
                     </div>     
                 </div>       
+                
 
             </form>
         </post-listing>

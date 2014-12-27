@@ -34,6 +34,10 @@ def user_ids
   {user_id: session.user_id, uuid: cookies.uuid}
 end
 
+def signup_if_new
+  session.user_id = $users.add({email: params.contact})._id if !session.user_id 
+end
+
 post '/signup' do
   user         = $users.add(params)  
   session.user_id = user._id
@@ -56,11 +60,13 @@ get '/listing/:id/?:name?' do
 end
 
 post '/listing/create' do 
+  signup_if_new
   res = Listings.create(params.merge!(user_ids))
   res.id+'/'+res.url_title
 end
 
 post '/offers/create' do
+  signup_if_new
   Offers.create(params.merge!(user_ids))
 end
 
