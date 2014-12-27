@@ -4,7 +4,7 @@ after do
     @response.body = @response.body.to_json		
 	end
 
-	#set_cookie(UUID_COOKIE,  SecureRandom.uuid, expires: Time.now+60*60*24*365) if !cookies[UUID_COOKIE]
+	#set_cookie('something',  SecureRandom.uuid, expires: Time.now+60*60*24*365) if !cookies['something']
 end
 
 def set_cookie(key, value, opts = {})

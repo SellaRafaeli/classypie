@@ -28,7 +28,7 @@ end
 
 def nice_id
   # Unique, URL-able, dev-friendly. Try it yourself!
-	$prod ? rand(2**128).to_s(36)+"-"+rand(1000).to_s : rand(10000).to_s
+	PROD ? rand(2**128).to_s(36)+"-"+rand(1000).to_s : rand(10000).to_s
 end
 
 def bp

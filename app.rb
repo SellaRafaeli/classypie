@@ -32,7 +32,7 @@ def locals
 end
 
 def user_ids
-  {user_id: session.user_id, uuid: cookies.uuid}
+  {user_id: session.user_id}
 end
 
 def signup_if_new

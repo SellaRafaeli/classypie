@@ -2,11 +2,7 @@
 relevant_offers = all_offers = Offers.by_listing(listing._id) || []
 if !is_owner 
   #get only this user's offers. 
-  relevant_offers = all_offers.select {|o| (o.user_id == user_id) && user_id } || []
-  
-  if relevant_offers.empty? 
-    relevant_offers = all_offers.select {|o| o.uuid == uuid } || [] 
-  end
+  relevant_offers = all_offers.select {|o| (o.user_id == user_id) && user_id } || []  
 end
 
 %>  
@@ -50,7 +46,7 @@ end
             <% (relevant_offers * 5).each do |offer| %>                              
                 <div class='offerContainer col-md-4'>
                   <div class='offer bg-info'>
-                      <p><a href="/user/<%= offer.user_id || offer.uuid %>">  <%= offer.name %> </a></p>
+                      <p><a href="/user/<%= offer.user_id %>">  <%= offer.name %> </a></p>
                       <% if offer.price %> <p>Price: <%= offer.price %></p> <% end %>
                       <p>Details: <%= offer.details %></span></p>
                       <p>Contact: <%= offer.contact %> </span></p>

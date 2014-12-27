@@ -14,8 +14,7 @@ configure do
 end
 
 # The following are exposed globally via $varname.
-$app_name   = 'barry2'
+$app_name   = 'classyPie1'
 $prod       = settings.production?
-UUID_COOKIE = 'uuid'
 
 require './db/settings'
