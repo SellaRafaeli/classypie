@@ -64,6 +64,10 @@ post '/offers/create' do
   Offers.create(params.merge!(user_ids))
 end
 
+post '/offers/addMsg/:offer_id' do
+  Messages.create(params.merge!(user_ids))
+end
+
 # get '/offers/by_listing/:listing_id' do
 #   Offers.by_listing(params.listing_id)
 # end

@@ -32,6 +32,11 @@ function buildOffers(){
         $.post('/offers/create', newOffer).success(function(res) { 
             document.location.reload();}).error(genError);
     }        
+
+    offers.addMsg = function(elem) {
+        var offerID = elem.getAttribute('offer_id');
+        $.post('/offers/addMsg/'+offerID, {text: elem.value}, function(res) { document.location.reload() }).error(genError);
+    }
 }
 
 function buildListingPage() {
@@ -75,14 +80,9 @@ current_user.markLoggedIn(currentUserEmailArea.text());
 runByURL();
 //$('#submitListing').click();
 
-function fillRandomListingVals() {
-    var gr = getRandomName;
-    objToForm($("#postForm"),{title: gr(), where: gr(), 
-                              when: gr(), for_about: gr(), 
-                              details: gr(), contact: 'me@hello.com'});
-}
 
 Mousetrap.bind(['command+k'], function(e) {
-    fillRandomListingVals();
+    fillFormRandom('#postForm');
+    fillFormRandom('#newOfferForm');
     return false;
 });

@@ -1,5 +1,5 @@
 <%
-is_owner = !user_id.nil? && (listing.user_id == user_id)
+is_owner = (!user_id.nil? && (listing.user_id == user_id)) || (listing.uuid == uuid)
 relevant_offers = all_offers = Offers.by_listing(listing._id) || []
 if !is_owner 
   #get only this user's offers. 
@@ -24,7 +24,7 @@ end
                 </div>
 
                 <div class="input-group">                        
-                    <span class="input-group-addon">Price</span>
+                    <span class="input-group-addon">Price (optional)</span>
                     <input type="text" name="price" class="form-control" placeholder="How much will you be charging?">
                 </div>
 
@@ -45,15 +45,24 @@ end
       <% end %>
       
       <% if relevant_offers.any? %>
-        <h2>Offers</h2>
+        <h2 class='col-md-12'>Offers</h2>
         <div id='offersListContainer' class="col-md-12">          
           <offers class='col-md-12'>
-            <% relevant_offers.each do |offer| %>                              
-                <div name=offersList class='offer bg-info col-md-4'>
-                      <p>Name: <span name='name'>  <%= offer.name %> </span> </p>
-                      <p>Price: <span name='price'><%= offer.price %></span> </p>
-                      <p>Details: <span name='details'> <%= offer.details %></span></p>
-                      <p>Contact: <span name='contact'> <%= offer.contact %> </span></p>
+            <% (relevant_offers * 5).each do |offer| %>                              
+                <div class='offerContainer col-md-4'>
+                  <div class='offer bg-info'>
+                      <p><a href="/user/<%= offer.user_id || offer.uuid %>">  <%= offer.name %> </a></p>
+                      <% if offer.price %> <p>Price: <%= offer.price %></p> <% end %>
+                      <p>Details: <%= offer.details %></span></p>
+                      <p>Contact: <%= offer.contact %> </span></p>
+                      <% Messages.by_offer(offer._id).each do |msg | %>
+                        <%= erb :message, locals: locals.merge({msg: msg, offer: offer}) %>
+                      <% end %>
+                      <form id='newOfferMessage'>
+                          <textarea offer_id=<%=offer._id%> onkeydown='ifEnter(offers.addMsg)' aria-describedby="helpBlock" placeholder="Write a comment..."></textarea>
+                          <span id="helpBlock" class="help-block">(Press 'Enter' to submit)</span>
+                      </form>
+                  </div>
                 </div>                        
             <% end %>
           </offers>

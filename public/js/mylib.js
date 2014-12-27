@@ -26,6 +26,7 @@ $.fn.toObj = $.fn.serializeObject = function()
 
 //http://stackoverflow.com/questions/7298364/using-jquery-and-json-to-populate-forms
 function objToForm(form, data) {   
+    form = $(form);
     $.each(data, function(key, value){  
     var $ctrl = $('[name='+key+']', form);  
     switch($ctrl.attr("type"))  
@@ -45,8 +46,21 @@ function objToForm(form, data) {
 }
 
 function getRandomName(){ 
-    var first = _.sample(["Abe","Bob","Carl","Danny","Eve"]);
-    var last  = _.sample(["Aaronson","Berkeley","Cohen","Davis","Elm"]);
+    var first = _.sample(["Abe","Bob","Carl","Danny","Eve","Frank","Gertrude","Hal","Ivan","Jake","Kay"]);
+    var last  = _.sample(["Aaronson","Berkeley","Cohen","Davis","Elm","Francis","Gomez","Hendeson",'Index','Jerrison','Kendrick']);
     var num = _.random(0,1000);
     return first+" "+last+" "+num;
+}
+
+function fillFormRandom(form, randFn) {
+    var randFn = randFn || getRandomName;
+    var keysObj = $(form).serializeObject();
+    for (var key in keysObj) keysObj[key] = randFn();
+    objToForm($(form), keysObj);
+}
+
+function ifEnter(func) {
+    if (event.keyCode == 13 && !event.shiftKey) {
+        func(event.srcElement);   
+    }
 }
