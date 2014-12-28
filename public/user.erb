@@ -1,6 +1,5 @@
 <%
-bp
-  reviews_of_user = Reviews.find_all({target_id: params.id})
+  #reviews_of_user = Reviews.of_target(user_id)
 %>
 
 
@@ -23,19 +22,4 @@ bp
         <button>Submit</button>
       </form>
 
-      <h1> Add Review </h1>
-      <form id='userData' method='POST' action=<%='/reviews/user/'+user_id%> >
-        
-        <input type='number' name='rating'>
-        <textarea type='text' name='text'></textarea>        
-        <button>Submit</button>
-      </form>
-
-      <h1> Reviews </h1>
-
-      <% reviews_of_user.each do |rev| %>
-        <div> <%= YAML.dump rev %> </div>
-      <% end %>
-
-
-      <h3> nothing here </h3>
+      <%= erb :user_reviews, locals: locals %>
