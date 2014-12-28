@@ -67,3 +67,5 @@ function geolocate() {
   }
 }
 // [END region_geolocation]
+
+if ($('#autocompleteAddress').length) initializeAutocompleteAddress();

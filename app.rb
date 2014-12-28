@@ -19,11 +19,13 @@ require_all './middleware'
 # require './users/users_api'
 
 def locals
-  listing = Listings.get(params.id) || {}
+  listing = params.listing_id ? Listings.get(params.listing_id) : {}
+  target_user = params.target_user_id ? Users.get(params.target_user_id) : nil
   user    = (id = session.user_id) ? Users.get(id) : nil
   user_id = user && user._id
   
   {listing: listing, 
+   target_user: target_user,
    user: user, 
    user_email: user && user.email, 
    user_id: user_id,
@@ -56,7 +58,7 @@ get '/' do
   erb :index, layout: :layout, locals: locals
 end
 
-get '/listing/:id/?:name?' do  
+get '/listing/:listing_id/?:name?' do  
   erb :index, layout: :layout, locals: locals
 end
 
@@ -75,19 +77,19 @@ post '/offers/addMsg/:offer_id' do
   Messages.create(params.merge!(user_ids))
 end
 
-get '/user/:id/?:name?' do
+get '/user/:target_user_id/?:name?' do
   erb :user, layout: :layout, locals: locals
 end
 
-post '/user/:id/?:name?' do
+post '/user/:target_user_id/?:name?' do
   Users.update(params.merge!(user_ids))  
   erb :user, layout: :layout, locals: locals
 end
 
-post '/reviews/user/:user_id' do
-  params.target_id = params[:user_id]
+post '/reviews/user/:target_user_id' do  
+  bp
   params.poster_id = session.user_id
-  Reviews.create(params)
+  Reviews.create(params.merge!(user_ids))
   erb :user, layout: :layout, locals: locals
 end
 

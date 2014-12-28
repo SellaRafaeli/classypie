@@ -1,3 +1,6 @@
+<%
+#bp
+%>
 <!-- <div id="navbar" class="navbar-collapse collapse"> -->
 <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -19,7 +22,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- <li><a href="../navbar/">Default</a></li> -->
+        <% if user_id %>
         <li><a href=<%='/user/'+user_id%> id='currentUserEmail'> <%= user_email %> </a></li>
+        <% end %>
         <li><a href="#" id='loginBtn' onclick='signup()'>Login/Sign Up</a></li>
         <li><a href="#" id='logoutBtn' onclick='logout()'>Logout</a></li>
         <!-- <li><a href="../navbar-static-top/">Static top</a></li> -->

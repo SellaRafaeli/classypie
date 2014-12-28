@@ -1,10 +1,11 @@
 <%
-  #reviews_of_user = Reviews.of_target(user_id)
+
 %>
 
 
         <user-page class="full-page row">
-            <div class="col-md-4"><p>Name: <%= user.name %></p></div>
+            <div class="col-md-4"><p>Name: <%= target_user.name || '' %></p></div>
+            <div class="col-md-4"><p>Email: <%= target_user.email || '' %></p></div>
             <div class="col-md-4"><p>User page </p></div>
             <div class="col-md-4"><p>User page </p></div>
             <div class="col-md-4"><p>User page 0</p></div>
@@ -13,12 +14,12 @@
         </user-page>
 
         <h1> Edit Data </h1>
-      <form id='userData' method='POST' action=<%='/user/'+user_id%>>
-        <input type='text' name='name' value='<%= user.name %>'>
-        <input type='url' name='fb_page' value='<%= user.fb_page %>'>
-        <input type='url' name='website' value='<%= user.website %>'>
-        <textarea type='text' name='about_me'><%= user.about_me %></textarea>
-        <textarea type='text' name='public_contact_details'><%= user.public_contact_details %></textarea>
+      <form id='userData' method='POST' action=<%='/user/'+target_user._id%>>
+        <input type='text' name='name' value='<%= target_user.name %>'>
+        <input type='url' name='fb_page' value='<%= target_user.fb_page %>'>
+        <input type='url' name='website' value='<%= target_user.website %>'>
+        <textarea type='text' name='about_me'><%= target_user.about_me %></textarea>
+        <textarea type='text' name='public_contact_details'><%= target_user.public_contact_details %></textarea>
         <button>Submit</button>
       </form>
 

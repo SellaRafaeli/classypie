@@ -24,9 +24,9 @@ module Reviews
 
   ## 
   def of_target(user_id) 
-    reviews = Reviews.find_all(target_id: user_id)
+    reviews = Reviews.find_all(target_user_id: user_id)
     reviews.map! {|rev| 
-      rev.poster = $users.find({_id: rev.poster_id}, {fields: ['name']}).to_a[0]; 
+      rev.poster = $users.find({_id: rev.poster_id}, {fields: ['name', 'email']}).to_a[0]; 
       rev   
     }
   end

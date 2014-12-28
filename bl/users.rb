@@ -18,4 +18,11 @@ module Users
     $users.update_id(params.user_id, fields)    
   end
 
+  ## 
+
+  def page_for(params)
+    data = {target_user: Users.get(params.id)}
+    erb :user, layout: :layout, locals: params
+  end
+
 end
