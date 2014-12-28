@@ -20,6 +20,9 @@ Next steps:
 1. 'User Page' which includes:
   > list of user's postings and his offers (only he can see).
   > reviews and ratings (publicly viewable/'addable')
+
+    - done 
+    
 2. Search page for listings 
 3. Sign-Up page for sellers (email me when new listing of certain criteria)
 3.5 send email to sellers that have signed up for a keyword/area

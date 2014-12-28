@@ -22,6 +22,7 @@ class Mongo::Collection
 
 		find_one((field.to_s) => params.to_s)
 	end
+
 	alias_method :find_by, :find_one
   alias_method :get, :find_one
 
