@@ -1,6 +1,6 @@
 <%
-  
-
+bp
+  reviews_of_user = Reviews.find_all({target_id: params.id})
 %>
 
 
@@ -13,6 +13,29 @@
             <div class="col-md-4"><p>User page 2</p></div>
         </user-page>
 
-      <form id='userData' method='POST' action='/user/updateMe'>
-        <input type='text' name='name'>
+        <h1> Edit Data </h1>
+      <form id='userData' method='POST' action=<%='/user/'+user_id%>>
+        <input type='text' name='name' value='<%= user.name %>'>
+        <input type='url' name='fb_page' value='<%= user.fb_page %>'>
+        <input type='url' name='website' value='<%= user.website %>'>
+        <textarea type='text' name='about_me'><%= user.about_me %></textarea>
+        <textarea type='text' name='public_contact_details'><%= user.public_contact_details %></textarea>
+        <button>Submit</button>
       </form>
+
+      <h1> Add Review </h1>
+      <form id='userData' method='POST' action=<%='/reviews/user/'+user_id%> >
+        
+        <input type='number' name='rating'>
+        <textarea type='text' name='text'></textarea>        
+        <button>Submit</button>
+      </form>
+
+      <h1> Reviews </h1>
+
+      <% reviews_of_user.each do |rev| %>
+        <div> <%= YAML.dump rev %> </div>
+      <% end %>
+
+
+      <h3> nothing here </h3>

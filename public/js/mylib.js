@@ -64,3 +64,9 @@ function ifEnter(func) {
         func(event.srcElement);   
     }
 }
+
+function log(x) { console && console.log(x); }
+function addPlaceholdersDefaults() {
+    var elems = [].slice.call($('input').add($('textarea')));
+        elems.forEach(function(el) { el.placeholder = el.placeholder || el.name });
+}

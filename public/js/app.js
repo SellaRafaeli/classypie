@@ -95,5 +95,7 @@ Mousetrap.bind(['command+k'], function(e) {
 
 $(function() {
     console.log( "ready!" );
+    addPlaceholdersDefaults();
+    if ($('#autocompleteAddress').length) initializeAutocompleteAddress();
     // $('.datepicker').datepicker();
 });

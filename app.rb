@@ -15,8 +15,8 @@ require './settings'
 require './db/mongo'
 require_all './bl'
 require_all './middleware'
-require './users/user'
-require './users/users_api'
+# require './users/user'
+# require './users/users_api'
 
 def locals
   listing = Listings.get(params.id) || {}
@@ -79,8 +79,15 @@ get '/user/:id/?:name?' do
   erb :user, layout: :layout, locals: locals
 end
 
-post '/user/updateMe' do
+post '/user/:id/?:name?' do
   Users.update(params.merge!(user_ids))  
+  erb :user, layout: :layout, locals: locals
+end
+
+post '/reviews/user/:user_id' do
+  params.target_id = params[:user_id]
+  params.poster_id = session.user_id
+  Reviews.create(params)
   erb :user, layout: :layout, locals: locals
 end
 

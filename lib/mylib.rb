@@ -20,7 +20,9 @@ class Hash
     self.merge(params)
   end
 
-  def just(*args)
+  def just(firstItem, *args)
+    args = (firstItem.is_a? Array) ? firstItem : args.unshift(firstItem)
+    
     args = (args.map {|v| v.to_s}) + (args.map {|v| v.to_sym})
     self.slice(*args)
   end

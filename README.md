@@ -22,6 +22,9 @@ Next steps:
   > reviews and ratings (publicly viewable/'addable')
 2. Search page for listings 
 3. Sign-Up page for sellers (email me when new listing of certain criteria)
+3.5 send email to sellers that have signed up for a keyword/area
+3.6 send email to buyers whenever something happens for me 
+3.7 send email to Sella whenever anything happens. 
 4. Front-End design. 
 
 Todo someday: 

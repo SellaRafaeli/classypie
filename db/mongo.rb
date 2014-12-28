@@ -14,17 +14,22 @@ class Mongo::Collection
 	# 	$cache[params.to_s] ||= find_one(params)
 	# end
 
-	def find_one(params)
-		self.find(params).first	
+	#get/find_by/find_one('id123')
+	#get/find_by/find_one({email: 'bob@gmail.com'})
+	#get/find_by/find_one('bob@gmail.com', 'email')
+	def find_one(params, field = :_id)		
+		return self.find(params).first if params.is_a? Hash
+
+		find_one((field.to_s) => params.to_s)
 	end
+	alias_method :find_by, :find_one
+  alias_method :get, :find_one
+
 
 	def find_all(params = {})
 		self.find(params).to_a
 	end
-
-  def get(_id)
-    self.find_one(_id: _id)
-  end
+	alias_method :all, :find_all
 
 	def add(doc)
 		doc[:_id] = nice_id
