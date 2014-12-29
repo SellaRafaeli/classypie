@@ -93,15 +93,14 @@ post '/reviews/user/:target_user_id' do
 end
 
 get '/search/?:content?/?:location?' do 
-  if params.content && params.location && !params.lng && !params.lat
-    params.lat, params.lng = Search.coordinates(params.location)
-  end
-
-  
-  
   data = locals.merge(params)
-  bp
-  data.listings = Listings.search(params.content,params.lat,params.lng)
+
+  if params.content && params.location 
+    params.lat, params.lng = Search.coordinates(params)
+    data.listings = Listings.search(params.content,params.lat,params.lng)
+  else
+    data.listings = []
+  end
 
   erb :search, layout: :layout, locals: data
 end
