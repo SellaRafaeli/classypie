@@ -14,3 +14,4 @@ gem 'activesupport',      	'4.0.0' # utility functions like hash.slice
 #gem 'random-word',          '1.3.0' # for random words for testing
 #gem 'bower',                '0.0.2' # for frontend asset management
 gem 'require_all'
+gem 'httpclient'

@@ -8,11 +8,10 @@ function runByURL() {
 
 //form page
 function buildFormPage(){
-    var form = $("#postForm");
-    window.addressDetails = {}; //updated by googleMapsAutocomplete
+    var form = $("#postForm");    
     var getFormData = function() { 
         var res = form.toObj(); 
-        res.addressDetails = addressDetails;
+        res.addressDetails = window.addressDetails; //updated by googleMapsAutocomplete
         return res;
     };
 
@@ -51,6 +50,17 @@ function buildListingPage() {
 
 function buildUserPage() {
     console.log("In user page");
+}
+
+function buildSearchPage(){
+    console.log("In search page");
+    var form = $("#searchForm");
+    form.submit(function(){   
+        var data = form.toObj();     
+        document.location.href='/search/'+data.content+'/'+data.location+'?lat='+addressDetails.lat+'&lng='+addressDetails.lat;
+
+        return false;
+    });
 }
 
 //current user area 

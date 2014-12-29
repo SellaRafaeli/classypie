@@ -2,13 +2,13 @@
 // of the Google Places API to help users fill in the information.
 
 var autocompleteGoogleAddressInput;
-
+window.addressDetails = {}; 
 function initializeAutocompleteAddress() {
   
   // Create the autocomplete object, restricting the search
   // to geographical location types.
   autocompleteGoogleAddressInput = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('autocompleteAddress')),
+      /** @type {HTMLInputElement} */(document.getElementsByClassName('autocompleteAddress')[0]),
       { types: ['geocode'] });
   // When the user selects an address from the dropdown,
   // populate the address fields in the form.
@@ -45,6 +45,8 @@ function fillInAddress() {
       //console.log(addressType, val);
       //document.getElementById(addressType).value = val;
     }
+    window.addressDetails.lat = place.geometry.location.lat();
+    window.addressDetails.lng = place.geometry.location.lng();
   }
 }
 // [END region_fillform]
@@ -68,4 +70,4 @@ function geolocate() {
 }
 // [END region_geolocation]
 
-if ($('#autocompleteAddress').length) initializeAutocompleteAddress();
+if ($('.autocompleteAddress').length) initializeAutocompleteAddress();

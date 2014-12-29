@@ -14,3 +14,13 @@ Use-Cases
 
 - physical goods 
   > 1st/2nd hand clothes, electronics, home appliances 
+
+
+Tech
+----
+
+Get latitude, longitude by km: 
+http://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-km-distance
+
+Latitude: 1 deg = 110.54 km
+Longitude: 1 deg = 111.320*cos(latitude) km

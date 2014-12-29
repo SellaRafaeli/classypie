@@ -5,7 +5,13 @@ module Listings
 
   def create(params)
     data = params.merge!({created_at: Time.now, updated_at: Time.now, num_views: 0})
+    if data.addressDetails
+      data.lat = data.addressDetails.lat.to_f
+      data.lng = data.addressDetails.lng.to_f
+    end
+
     id = $listings.add(data)._id
+    
     url_title = URI::encode(data.title.gsub(" ","-"))
     {id: id, url_title: url_title}
   end
@@ -19,6 +25,18 @@ module Listings
   def gen_search(crit)
    $listings.find(crit).to_a
   end
+
+  def search(term, lat, lng) 
+    reg = Regexp.new(term)
+    lat, lng = lat.to_f, lng.to_f
+    
+    $listings.find( { lat: { '$gt' => lat-10, '$lt' => lat+10 },
+                      lng: { '$gt' => lng-10, '$lt' => lng+10 },
+                      :$or => [{title: reg}, {details: reg}]
+                    } ).to_a;
+
+  end
+
 
   ## Listings.search_by_content_and_loc('plumber', '')
   ## Listings.search_by_content_and_loc('', 'Haifa')

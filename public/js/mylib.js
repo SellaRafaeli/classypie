@@ -70,3 +70,12 @@ function addPlaceholdersDefaults() {
     var elems = [].slice.call($('input').add($('textarea')));
         elems.forEach(function(el) { el.placeholder = el.placeholder || el.name });
 }
+
+function formsNoSubmitOnEnter() {
+    var checkEnter = function(e){
+     e = e || event;
+     var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
+     return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+    }
+    document.querySelector('form').onkeypress = checkEnter;
+}
