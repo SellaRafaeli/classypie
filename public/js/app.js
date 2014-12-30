@@ -57,7 +57,7 @@ function buildSearchPage(){
     var form = $("#searchForm");
     form.submit(function(){   
         var data = form.toObj();     
-        document.location.href='/search/'+data.content+'/'+data.location+'?lat='+addressDetails.lat+'&lng='+addressDetails.lat;
+        document.location.href='/search/'+data.content+'/'+data.location+'?lat='+addressDetails.lat+'&lng='+addressDetails.lng;
 
         return false;
     });
