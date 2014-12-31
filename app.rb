@@ -58,11 +58,6 @@ get '/' do
   erb :index, layout: :layout, locals: locals
 end
 
-get '/modo' do 
-  send_file File.join(settings.public_folder, 'modo.html')
-end
-
-
 get '/listing/:listing_id/?:name?' do  
   erb :index, layout: :layout, locals: locals
 end
