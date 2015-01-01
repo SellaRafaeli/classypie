@@ -1,0 +1,24 @@
+
+        <h2> data of user </h2>
+        <user-page class="full-page row">
+            <div class="col-md-4"><p>Name: <%= target_user.name || '' %></p></div>
+            <div class="col-md-4"><p>Email: <%= target_user.email || '' %></p></div>
+            <div class="col-md-4"><p>User page </p></div>
+            <div class="col-md-4"><p>User page </p></div>
+            <div class="col-md-4"><p>User page 0</p></div>
+            <div class="col-md-4"><p>User page 1</p></div>
+            <div class="col-md-4"><p>User page 2</p></div>
+        </user-page>
+
+        <% if target_user._id == user._id %>
+        <h1> Edit Data of user </h1>
+      <form id='userData' method='POST' action=<%='/user/'+target_user._id%>>
+        <input type='text' name='name' value='<%= target_user.name %>'>
+        <input type='url' name='fb_page' value='<%= target_user.fb_page %>'>
+        <input type='url' name='website' value='<%= target_user.website %>'>
+        <textarea type='text' name='about_me'><%= target_user.about_me %></textarea>
+        <textarea type='text' name='public_contact_details'><%= target_user.public_contact_details %></textarea>
+        <button>Submit</button>
+      </form>
+      <% end %>
+      <%= erb :user_reviews, locals: locals %>

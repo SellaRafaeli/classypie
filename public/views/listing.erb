@@ -1,0 +1,10 @@
+<% 
+ title_suffix = !listing.any? ? '' : (is_owner ? ' - Your ' : ' - ') + 'Request: '+listing.title
+ title = 'ClassyPie' + title_suffix
+%>
+
+        <listing-page>      
+
+
+              <%= erb :offers, locals: locals %>
+        </listing-page>

@@ -59,7 +59,7 @@ get '/' do
 end
 
 get '/listing/:listing_id/?:name?' do  
-  erb :index, layout: :layout, locals: locals
+  erb :listing, layout: :layout, locals: locals
 end
 
 post '/listing/create' do 
@@ -69,6 +69,7 @@ post '/listing/create' do
 end
 
 post '/offers/create' do
+
   signup_if_new
   Offers.create(params.merge!(user_ids))
 end

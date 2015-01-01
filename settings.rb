@@ -6,7 +6,7 @@ set :sessions,        true
 set :session_secret,  'eric_clapton'
 
 set :public_folder,   File.dirname(__FILE__) + '/public'
-set :views,           File.dirname(__FILE__) + '/public'
+set :views,           File.dirname(__FILE__) + '/public/views'
 set :my_key,          'my_val' # settings.my_key == 'my_val'
 
 configure do

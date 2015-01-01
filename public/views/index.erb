@@ -1,0 +1,147 @@
+  <header class="header-2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="navbar col-sm-12 navbar-fixed-top" role="navigation">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle"></button>
+                                    <a class="brand" href="/">
+                                    <!-- <img src="img/logo@2x.png" width="50" height="50" alt=""> -->
+                                    ClassyPie</a>
+                                </div>
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav pull-right">
+                                        <!-- <li class="active">
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Work</a>
+                                        </li>                                        
+                                        <li>
+                                            <a href="#">Contact</a>
+                                        </li> -->
+                                        <% if user_id %>
+                                        <li>
+                                            <a href=<%='/user/'+user_id%> id='currentUserEmail'> <%= user_email %> </a>                                            
+                                        </li>
+                                        <li><a href="#" id='logoutBtn' onclick='logout()'>Logout</a></li>
+                                        <% else %>
+                                        <li><a href="#" id='loginBtn' onclick='signup()'>Login/Sign Up</a></li>                                        
+                                        <% end %>
+                                    </ul>
+                                    <ul class="subnav">
+                                        <li>
+                                            <a href="#">Privacy</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Terms</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Advertise</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Affiliates</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Newsletter</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">About</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <section class="header-2-sub bg-midnight-blue">
+                    <div class="background">
+                        &nbsp;
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="hero-unit">
+                                    <h1>Let them come to you.</h1>
+                                </div>
+                                <div class="btns">
+                                  <form id='postForm'>
+                                    <input type="text" name='title' class="form-control" placeholder='What?'>
+                                    <input type="text" name='where' class="form-control autocompleteAddress" placeholder='Where?'>
+                                    <% unless user_email %>
+                                    <input type="text" name='contact' class="form-control" placeholder='your email'>
+                                    <% end %>
+                                    <!-- <a class="btn btn-inverse" href="#">Learn More</a>
+                                    <a class="btn btn-danger" href="#">Buy Now for $9</a> -->
+                                    <button id="submitListing" class="btn btn-primary" style='width: 100%'>
+                                        Submit
+                                    </button>
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                        
+                <section class="content-4">
+                    <div class="container">
+                      <h3>Professionals near you will contact you for whatever you need,<br>so you can get the best offer possible.</h3>
+                      <div class="row features">
+                        <div class="col-sm-4">
+                          <img src="../../common-files/icons/retina-ready-s@2x.png" alt="" width="117" height="104">
+                          <h6>Simplicity</h6>
+                          <p>Just post what you're looking for. People will contact you with offers.</p>
+                        </div>
+                        <div class="col-sm-4">
+                          <img src="../../common-files/icons/rocket@2x.png" alt="" width="101" height="101">
+                          <h6>Knowledge</h6>
+                          <p>Get any information you need from humans online, and choose which offer fits you best.</p>
+                        </div>
+                        <div class="col-sm-4">
+                          <img src="../../common-files/icons/clock@2x.png" alt="" width="104" height="104">
+                          <h6>Time</h6>
+                          <p>Stop chasing the people you're paying. You're the customer, let them work for it.</p>
+                        </div>
+                      </div>
+                    </div>
+                </section>
+
+                <section class="contacts-2">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <h3><br>Search, come on, enter something already. </h3>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <form>
+                        <label class="h6">Looking for:</label>
+                        <input type="text" class="form-control">
+                        <label class="h6">Where?</label>
+                        <input type="text" class="form-control">
+                        <label class="h6">Message</label>
+                        <textarea rows="7" class="form-control"></textarea>
+                        <button type="submit" class="btn btn-primary"><span class="fui-mail"></span>
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col-sm-5 col-sm-offset-1">
+                      <h6>Find options near you</h6>
+                      <p>Get in touch with professionals in your area.</p>
+                      <div class="map">                        
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/?ie=UTF8&amp;t=m&amp;ll=40.714353,-74.005973&amp;spn=0.04554,0.072956&amp;z=12&amp;output=embed"></iframe>
+                      </div>
+                      <h6>Get in touch</h6>
+                      <p>Read reviews and negotiate online to find the match that's best for you.</p>
+                      <div class="links">
+                        <a href="#"><span class="fui-phone"></span> Call them</a>
+                        <br>
+                        <a href="#"><span class="fui-mail"></span> Email them</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>

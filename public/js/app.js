@@ -15,7 +15,7 @@ function buildFormPage(){
         return res;
     };
 
-    listingID = getFormData().id;
+    //listingID = getFormData().id;
     
     form.submit(function(e) {               
         $.post('/listing/create', getFormData())
@@ -33,7 +33,7 @@ function buildOffers(){
 
     offers.addOffer = function() {
         var newOffer = newOfferForm.toObj();
-        newOffer.listing_id = listingID;
+        //newOffer.listing_id = listingID;
         $.post('/offers/create', newOffer).success(function(res) { 
             document.location.reload();}).error(genError);
     }        
@@ -73,24 +73,24 @@ function logout() {
     $.post('/logout').success(function(res){ document.location.reload(); }).error(genError);
 }
 
-current_user = {};
-loginBtn             = $('#loginBtn');
-logoutBtn            = $('#logoutBtn');
-currentUserEmailArea = $('#currentUserEmail');
-currentUserEmail = currentUserEmailArea.text();
+// current_user = {};
+// loginBtn             = $('#loginBtn');
+// logoutBtn            = $('#logoutBtn');
+// currentUserEmailArea = $('#currentUserEmail');
+// currentUserEmail = currentUserEmailArea.text();
 
-current_user.markLoggedIn = function(email) {
-    loginBtn.hide(); logoutBtn.hide();
-    if (email && email.trim()) {        
-        logoutBtn.show();
-        currentUserEmailArea.text(email);    
-    } else { //logged-out
-        loginBtn.show();
-        currentUserEmailArea.text('');
-    }
-}
+// current_user.markLoggedIn = function(email) {
+//     loginBtn.hide(); logoutBtn.hide();
+//     if (email && email.trim()) {        
+//         logoutBtn.show();
+//         currentUserEmailArea.text(email);    
+//     } else { //logged-out
+//         loginBtn.show();
+//         currentUserEmailArea.text('');
+//     }
+// }
 
-current_user.markLoggedIn(currentUserEmailArea.text());
+// current_user.markLoggedIn(currentUserEmailArea.text());
 
 //run
 runByURL();
