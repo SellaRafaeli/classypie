@@ -17,19 +17,30 @@ Prerequisites - MongoDB.
 3. Buyer (listing poster) and Seller (offer poster) can write messages to each other via the offer posted. (And/or trade emails and continue conversation via email).
 
 Next steps:
-1. 'User Page' which includes:
-  > list of user's postings and his offers (only he can see).
-  > reviews and ratings (publicly viewable/'addable')
+- homepage:
+  - make bottom form work 
+  - make bottom map sync with address 
+  - form validation
+- listing-page:
+  - remove extra whitespace
+  - support updating of listing for buyer
+  - disable editing of listing for non-buyer
+  - make nicer 'working on it'
+  - offers:
+    - form validation
+    - show user image in offer
+    - make nicer 'us/them'
+- user-page:
+  - enable setting of image for user
+  - show reviews in a nicer way
+- search-page:
+  - make general design 
 
-    - done 
-    
-2. Search page for listings 
-3. Sign-Up page for sellers (email me when new listing of certain criteria)
-3.5 send email to sellers that have signed up for a keyword/area
-3.6 send email to buyers whenever something happens for me 
-3.7 send email to Sella whenever anything happens. 
-4. Front-End design. 
 
 Todo someday: 
 - Signup with FB, Gmail, Twitter, GitHub
 - Get images of users (and encourage them to post images and personal data)
+3. Sign-Up page for sellers (email me when new listing of certain criteria)
+3.5 send email to sellers that have signed up for a keyword/area
+3.6 send email to buyers whenever something happens for me 
+3.7 send email to Sella whenever anything happens. 
