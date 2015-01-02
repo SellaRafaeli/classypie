@@ -38,7 +38,8 @@ def user_ids
 end
 
 def signup_if_new
-  session.user_id = Users.create({email: params.contact})._id if !session.user_id 
+  # Should verify email is given and not taken
+  session.user_id = Users.create({email: params.email})._id if !session.user_id 
 end
 
 post '/signup' do
@@ -51,7 +52,7 @@ get '/me' do
 end
 
 post '/logout' do
-  session.user_id = nil
+  session.clear
 end
 
 get '/' do 
@@ -87,9 +88,9 @@ post '/user/:target_user_id/?:name?' do
 end
 
 post '/reviews/user/:target_user_id' do  
+  signup_if_new
   params.poster_id = session.user_id
-  Reviews.create(params.merge!(user_ids))
-  erb :user, layout: :layout, locals: locals
+  Reviews.create(params.merge!(user_ids))  
 end
 
 get '/search/?:content?/?:location?' do 

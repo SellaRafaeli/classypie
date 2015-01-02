@@ -1,6 +1,6 @@
 $users = $mongo.collection('users')
 
-SETTABLE_USER_FIELDS = [:name, :about_me, :fb_page, :website, :public_contact_details]
+SETTABLE_USER_FIELDS = [:name, :desc, :img, :phone, :email, :fb_page, :website,]
 
 module Users
   extend self

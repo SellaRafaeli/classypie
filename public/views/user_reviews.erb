@@ -1,21 +1,20 @@
-<%
-  reviews_of_user = Reviews.of_target(target_user._id)
-%>
-
-
-      <h1> Add Review </h1>
-      <form id='userData' method='POST' action=<%='/reviews/user/'+target_user._id%> >
-        
-        <input type='number' name='rating'>
-        <textarea type='text' name='text'></textarea>        
-        <button>Submit</button>
+<div id="reviewsArea">  
+      <h3> Reviews </h3>
+      <h4> Add Review </h4>
+      <form id='newReviewForm' method='POST' action=<%='/reviews/user/'+target_user._id%> >              
+        <textarea type='text' class='form-control custom-control' name='text' placeholder='Tell us what you know about this user.'></textarea>   
+        <% unless user_email %> 
+        <input type='text' class='form-control' name='email' placeholder='your email'>
+        <% end %>
+        <button class='btn btn-info'>Submit</button>
       </form>
 
-      <h1> Reviews </h1>
-
+      <div id="reviewsList">
       <% reviews_of_user.each do |rev| %>
-        <div> <%= rev.to_json %> </div>
+        <div class="col-sm-4">
+            <h6><a href=<%='/user/'+rev.poster._id%>><%= rev.poster && rev.poster.email %></a></h6>
+            <%= rev.text * 10 %>
+        </div>        
       <% end %>
-
-
-      <h3> nothing here </h3>
+      </div>
+</div>

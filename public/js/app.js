@@ -50,6 +50,19 @@ function buildListingPage() {
 
 function buildUserPage() {
     console.log("In user page");
+    var target_user_id = $('#target_user_id').val();
+    $('#newReviewForm').submit(function(e) {               
+        var data = $(this).toObj();
+        $.post('/reviews/user/'+target_user_id, data)
+         .success(function(res) { document.location.href = '/user/'+target_user_id} ).error(genError);
+        e.preventDefault();
+    });
+
+    $('#editUserDataForm').submit(function(e){
+       $.post('/user/'+target_user_id, $(this).toObj())
+        .success(function(res) { document.location.reload(); } ).error(genError);
+       e.preventDefault();   
+    });
 }
 
 function buildSearchPage(){
@@ -60,7 +73,7 @@ function buildSearchPage(){
         document.location.href='/search/'+data.content+'/'+data.location+'?lat='+addressDetails.lat+'&lng='+addressDetails.lng;
 
         return false;
-    });
+    });    
 }
 
 //current user area 

@@ -37,6 +37,10 @@ class Mongo::Collection
 		doc
 	end
 
+	def one
+		self.all[0]
+	end
+
 	def update_id(_id, fields)
 		self.update({_id: _id}, '$set' => fields)		
 	end
