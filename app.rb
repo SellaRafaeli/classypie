@@ -69,7 +69,6 @@ post '/listing/create' do
 end
 
 post '/offers/create' do
-
   signup_if_new
   Offers.create(params.merge!(user_ids))
 end

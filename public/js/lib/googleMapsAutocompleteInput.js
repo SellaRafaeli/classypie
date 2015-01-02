@@ -4,16 +4,19 @@
 var autocompleteGoogleAddressInput;
 window.addressDetails = {}; 
 function initializeAutocompleteAddress() {
-  
-  // Create the autocomplete object, restricting the search
-  // to geographical location types.
-  autocompleteGoogleAddressInput = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementsByClassName('autocompleteAddress')[0]),
-      { types: ['geocode'] });
-  // When the user selects an address from the dropdown,
-  // populate the address fields in the form.
-  google.maps.event.addListener(autocompleteGoogleAddressInput, 'place_changed', function() {
-    fillInAddress();
+  var inputs = [].slice.call(document.getElementsByClassName('autocompleteAddress'));
+
+  inputs.forEach(function(input) {
+    // Create the autocomplete object, restricting the search
+    // to geographical location types.
+    autocompleteGoogleAddressInput = new google.maps.places.Autocomplete(
+        /** @type {HTMLInputElement} */(input),
+        { types: ['geocode'] });
+    // When the user selects an address from the dropdown,
+    // populate the address fields in the form.
+    google.maps.event.addListener(autocompleteGoogleAddressInput, 'place_changed', function() {
+      fillInAddress();
+    });
   });
 }
 

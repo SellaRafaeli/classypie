@@ -18,14 +18,15 @@ Prerequisites - MongoDB.
 
 Next steps:
 - homepage:
-  - make bottom form work 
+  - make bottom form work - CHECK
   - make bottom map sync with address 
   - form validation
+  - add footer 
 - listing-page:
-  - remove extra whitespace
+  - remove extra whitespace - CHECK 
   - support updating of listing for buyer
   - disable editing of listing for non-buyer
-  - make nicer 'working on it'
+  - make nicer 'working on it' partial
   - offers:
     - form validation
     - show user image in offer
@@ -35,7 +36,8 @@ Next steps:
   - show reviews in a nicer way
 - search-page:
   - make general design 
-
+- general: 
+  - add contact-us page
 
 Todo someday: 
 - Signup with FB, Gmail, Twitter, GitHub

@@ -105,6 +105,12 @@ Mousetrap.bind(['command+k'], function(e) {
 
 $(function() {
     console.log( "ready!" );
+    dontSubmitFormsOnEnter();
     addPlaceholdersDefaults();    
+    syncTwoInputs('#pfTitle','#sfTitle');
+    syncTwoInputs('#pfAddress','#sfAddress');
+    syncTwoInputs('#pfContact','#sfContact');
     // $('.datepicker').datepicker();
 });
+
+

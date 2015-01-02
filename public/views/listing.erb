@@ -1,10 +1,26 @@
 <% 
- title_suffix = !listing.any? ? '' : (is_owner ? ' - Your ' : ' - ') + 'Request: '+listing.title
- title = 'ClassyPie' + title_suffix
+ title_line = is_owner ? 'Your Listing' : 'Somebody is looking for...'
 %>
 
         <listing-page>      
+              <current-listing>
+                        <section class="content-29">
+                            <div class="container">
+                              <div class="col-sm-8 col-sm-offset-2">
+                                <h3><%= title_line %></h3>
+                                <p>Get in touch with professionals regarding your listing. Talk to them anonymously, review their reviews, and negotiate your price.</p>
 
-
+                                <the-listing>
+                                    <input class='form-control' placeholder='title' value='<%= listing.title %>'>
+                                    <input class='form-control' placeholder='location' value='<%= listing.where %>'>
+                                    <textarea class='form-control' placeholder='details' style='resize: none'></textarea>
+                                <the-listing>
+                                
+                                <% if is_owner %> 
+                                <p>This is your listing as it appears to sellers. Edit it at any time.</p>
+                                <% end %>
+                              </div>
+                        </section>
+                </current-listing>
               <%= erb :offers, locals: locals %>
         </listing-page>

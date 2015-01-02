@@ -7,93 +7,79 @@ end
 
 %>  
 
-   <current-listing>
-            <section class="content-29">
-                <div class="container">
-                  <div class="col-sm-8 col-sm-offset-2">
-                    <h3>Get in touch with professionals regarding your listing.</h3>
-                    <p>Talk to them anonymously, review their reviews, and negotiate your price.</p>
-                    <p>This is your listing as it appears to sellers. Edit it at any time.</p>
-                    <input class='form-control' placeholder='title' value='<%= listing.title %>'>
-                    <input class='form-control' placeholder='location' value='<%= listing.where %>'>
-                    <textarea class='form-control' placeholder='details'></textarea>
-                  </div>
-            </section>
-    </current-listing>
 
-
-  <offersArea>        
-    <% if !is_owner && !relevant_offers.any? %>
-      <div class="col-md-3"></div>
-
-      <div id="newOffer" class="col-md-6">
-          <h3>Make an Offer</h3>
-          <form id='newOfferForm'>
-                <input type="hidden" name="listing_id" value='<%= listing._id %>'>
-                <div class="input-group">                        
-                    <span class="input-group-addon">Who are you?</span>
-                    <input type="text" name="name" class="form-control" placeholder="Your name">
-                </div>
-
-                <div class="input-group">                        
-                    <span class="input-group-addon">Price (optional)</span>
-                    <input type="text" name="price" class="form-control" placeholder="How much will you be charging?">
-                </div>
-
-                <div class="input-group">                        
-                    <span class="input-group-addon">Details</span>
-                    <textarea name="details" class="form-control" placeholder="Convince the customer to pick you! Add your offer, details about you, your personal phone number - whatever" style="resize:none" maxlength="280"></textarea>
-                </div>
-
-                <div class="input-group">                        
-                    <span class="input-group-addon">Contact via</span>
-                    <input name="contact" value='<%= user_email %>' class="form-control" placeholder="your email/phone"></input>
-                </div>
-
-                <button type='button' class="input-group" onclick='offers.addOffer()'>Submit</button>
-          </form>
-      </div>
-      <div class="col-md-3"></div>
-      <% end %>
-      
-      <%if relevant_offers.any? %>
+  <offersArea>            
         <section class="content-29">
                 <div class="container">
-                  <div class="col-sm-8 col-sm-offset-2">
-                    <h3>Offers</h3>        
+                  <% if !is_owner && !relevant_offers.any? %>
+                    <div class="col-md-2"></div>
+
+                    <div id="newOffer" class="col-md-8">
+                        <h3>Make an Offer</h3>
+                        <form id='newOfferForm'>
+                              <input type="hidden" name="listing_id" value='<%= listing._id %>'>
+                              <div class="input-group">                        
+                                  <span class="input-group-addon">Who are you?</span>
+                                  <input type="text" name="name" class="form-control" placeholder="Your name">
+                              </div>
+
+                              <div class="input-group">                        
+                                  <span class="input-group-addon">Price (optional)</span>
+                                  <input type="text" name="price" class="form-control" placeholder="How much will you be charging?">
+                              </div>
+
+                              <div class="input-group">                        
+                                  <span class="input-group-addon">Details</span>
+                                  <textarea name="details" class="form-control" placeholder="Convince the customer to pick you! Send a personal message here to the buyer - include your offer, details about you, your personal phone number - whatever you want." style="resize:none" maxlength="280"></textarea>
+                              </div>
+
+                              <div class="input-group">                        
+                                  <span class="input-group-addon">Contact via</span>
+                                  <input name="contact" value='<%= user_email %>' class="form-control" placeholder="your email/phone"></input>
+                              </div>
+
+                              <button type='button' class="btn btn-info input-group" onclick='offers.addOffer()' style='width: 100%'>Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <% end %>
+
+                  <%if relevant_offers.any? %>
+                            <div class="col-sm-8 col-sm-offset-2">
+                              <h3>Offers</h3>        
+                            </div>
+
+                            <offers id='offers' class='row features'>
+                    <% (relevant_offers * 5).each do |offer| %>                              
+                            <div class='col-sm-3 offer'>
+                                <img src="../../common-files/icons/Chat@2x.png" alt="" width="100" height="100">
+                                <h6><a href="/user/<%= offer.user_id %>">  <%= "Moshe Bon Jovi Jovi LTD"+' ('+offer.contact+')' %> </a></h6>
+                                <%= offer.details %>                                 
+                                <% if offer.price %> <div>Offered Price: <%= offer.price %></div> <% end %>
+                                <div class='conversation'>
+                                  <% Messages.by_offer(offer._id).each do |msg | %>
+                                  <%= erb :message, locals: locals.merge({msg: msg, offer: offer}) %>
+                                  <% end %>
+                                </div>
+                                <form id='newOfferMessage'>
+                                    <textarea offer_id=<%=offer._id%> onkeydown='ifEnter(offers.addMsg)' aria-describedby="helpBlock" placeholder="Write a comment..."></textarea>
+                                    <span id="helpBlock" class="help-block">(Press 'Enter' to submit)</span>
+                                </form>
+                            </div>
+                    <% end %>
+                  </offers>
                   </div>
+
+                <% elsif is_owner %>
+                  <section class="content-29">
+                          <div class="container">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                  <%= erb :working_on_it, locals: locals %>
+                            </div>
+                  </section>  
+                <% end %>
         </section>
         
 
-        <offers class='row features'>
-          <% (relevant_offers * 5).each do |offer| %>                              
-                  <div class='col-sm-3 offer'>
-                      <img src="../../common-files/icons/Chat@2x.png" alt="" width="100" height="100">
-                      <h6>Block Model</h6>
-                      You can easily combine any components in a variety of design projects.
-                      <p><a href="/user/<%= offer.user_id %>">  <%= offer.name %> </a></p>
-                      <% if offer.price %> <p>Price: <%= offer.price %></p> <% end %>
-                      <p>Details: <%= offer.details %></span></p>
-                      <p>Contact: <%= offer.contact %> </span></p>
-                      <% Messages.by_offer(offer._id).each do |msg | %>
-                        <%= erb :message, locals: locals.merge({msg: msg, offer: offer}) %>
-                      <% end %>
-                      <form id='newOfferMessage'>
-                          <textarea offer_id=<%=offer._id%> onkeydown='ifEnter(offers.addMsg)' aria-describedby="helpBlock" placeholder="Write a comment..."></textarea>
-                          <span id="helpBlock" class="help-block">(Press 'Enter' to submit)</span>
-                      </form>
-                  </div>
-          <% end %>
-        </offers>
-        </div>
-
-      <% elsif is_owner %>
-        <div class="col-md-12">
-          <div class="col-md-3"></div>
-          <div class="col-md-5"> 
-            <%= erb :working_on_it, locals: locals %>
-          </div>  
-          <div class="col-md-4"></div>
-        </div>>
-      <% end %>
+        
   </offersArea>

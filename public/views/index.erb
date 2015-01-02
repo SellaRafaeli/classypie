@@ -1,3 +1,4 @@
+<index>
   <header class="header-2">
                     <div class="container">
                         <div class="row">
@@ -10,25 +11,17 @@
                                 </div>
                                 <div class="collapse navbar-collapse">
                                     <ul class="nav pull-right">
-                                        <!-- <li class="active">
-                                            <a href="#">Home</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Work</a>
-                                        </li>                                        
-                                        <li>
-                                            <a href="#">Contact</a>
-                                        </li> -->
+                                        <!-- <li class="active"><a href="#">Home</a></li> -->
                                         <% if user_id %>
                                         <li>
                                             <a href=<%='/user/'+user_id%> id='currentUserEmail'> <%= user_email %> </a>                                            
                                         </li>
                                         <li><a href="#" id='logoutBtn' onclick='logout()'>Logout</a></li>
                                         <% else %>
-                                        <li><a href="#" id='loginBtn' onclick='signup()'>Login/Sign Up</a></li>                                        
+                                        <li><a href="#" id='loginBtn' onclick='signup()'>Login/Sign Up</a></li>
                                         <% end %>
                                     </ul>
-                                    <ul class="subnav">
+                                    <!-- <ul class="subnav">
                                         <li>
                                             <a href="#">Privacy</a>
                                         </li>
@@ -50,7 +43,7 @@
                                         <li>
                                             <a href="#">Contact Us</a>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                         </div>
@@ -64,14 +57,14 @@
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2">
                                 <div class="hero-unit">
-                                    <h1>Let them come to you.</h1>
+                                    <h1>Let the best deal find you.</h1>
                                 </div>
-                                <div class="btns">
+                                <div id='mainPostForm' class="btns">
                                   <form id='postForm'>
-                                    <input type="text" name='title' class="form-control" placeholder='What?'>
-                                    <input type="text" name='where' class="form-control autocompleteAddress" placeholder='Where?'>
+                                    <input id='pfTitle' type="text" name='title' class="form-control" placeholder='What do you need? Plumber, Babysitter, iPhone, etc'>
+                                    <input id='pfAddress' type="text" name='where' class="form-control autocompleteAddress" placeholder='Where do you need it?'>
                                     <% unless user_email %>
-                                    <input type="text" name='contact' class="form-control" placeholder='your email'>
+                                    <input id='pfContact' type="text" name='contact' class="form-control" placeholder='Your email'>
                                     <% end %>
                                     <!-- <a class="btn btn-inverse" href="#">Learn More</a>
                                     <a class="btn btn-danger" href="#">Buy Now for $9</a> -->
@@ -119,12 +112,14 @@
                     <div class="col-sm-6">
                       <form>
                         <label class="h6">Looking for:</label>
-                        <input type="text" class="form-control">
+                        <input id='sfTitle' type="text" class="form-control">
                         <label class="h6">Where?</label>
-                        <input type="text" class="form-control">
-                        <label class="h6">Message</label>
-                        <textarea rows="7" class="form-control"></textarea>
-                        <button type="submit" class="btn btn-primary"><span class="fui-mail"></span>
+                        <input id='sfAddress' type="text" class="form-control autocompleteAddress">
+                        <% unless user_email %>
+                        <label class="h6">Your Email</label>
+                        <input id='sfContact' class="form-control">
+                        <% end %>
+                        <button type="button" onclick='$("#postForm").submit()' class="btn btn-primary"><span class="fui-mail"></span>                        
                         </button>
                       </form>
                     </div>
@@ -145,3 +140,4 @@
                   </div>
                 </div>
               </section>
+</index>

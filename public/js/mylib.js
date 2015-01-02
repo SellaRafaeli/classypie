@@ -71,11 +71,24 @@ function addPlaceholdersDefaults() {
         elems.forEach(function(el) { el.placeholder = el.placeholder || el.name });
 }
 
-function formsNoSubmitOnEnter() {
+function dontSubmitFormsOnEnter() {
     var checkEnter = function(e){
      e = e || event;
      var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
      return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
     }
     document.querySelector('form').onkeypress = checkEnter;
+}
+
+function syncInput(orig,follower) {
+    orig = $(orig);
+    follower = $(follower);
+    orig.keyup(function(){ follower.val(orig.val()); });
+    //orig.change(function(){ follower.val(orig.val()); });
+}
+
+function syncTwoInputs(a,b) { 
+    syncInput(a,b);
+    syncInput(b,a);
+    console.log("ok, synced", a, b);
 }
