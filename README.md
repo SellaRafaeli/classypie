@@ -30,8 +30,27 @@ Next steps:
   - offers:
     - form validation
     - show user image in offer
-    - make nicer 'us/them'
+    - make nicer 'us/them' - CHECK
 - user-page:
+  - data that interests us:
+    basic data:
+      main photo
+      description      
+      total score
+
+      address
+      facebook page
+      web page
+      number of reviews received
+      
+      number of reviews given (?) 
+      number of offers made (?)
+      bonuses (identity verified?)
+    - time on site
+      email
+      phone
+    - more photos 
+    - read the reviews 
   - enable setting of image for user
   - show reviews in a nicer way
 - search-page:

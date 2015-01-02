@@ -1,3 +1,78 @@
+<% 
+tg = target_user 
+reviews_of_user = Reviews.of_target(tg._id)
+prop_title = {
+    photo: 'Main Photo',
+    desc: 'Description',
+    total_score: 'Total Score',
+    num_reviews: 'Reviews Count',    
+    website: 'Website',
+    facebook_page: 'FB page'
+}
+prop_text = { #or mkup
+    desc: 'Seller is a great guy',
+    total_score: 10+20,
+    num_reviews: reviews_of_user.size.to_s+' reviews',
+    website: "<a target='_blank' href=#{tg.website}>#{tg.website}</a>",
+    facebook_page: "<a target='_blank' href=#{tg.facebook_page}>#{tg.facebook_page}</a>" 
+}
+
+def should_skip(p,u)
+    tg = u #target user
+    p = p.to_s
+    #return true if p=='website' && !tg.website
+    #return true if p=='facebook_page' && !tg.facebook_page
+    return false
+end
+
+props = prop_title.merge(prop_text).keys
+%>
+<user-page id='userPage'>
+
+
+<div class="features">
+                    <div class="container">
+                        <div class="row">
+
+                            <% props.each do |prop| %> 
+                                <% next if should_skip(prop,tg) %>
+                                <div class="col-sm-4">
+                                    <h6><%= prop_title[prop] || prop %></h6>
+                                    <%= prop_text[prop] %>
+                                </div>
+                            <% end %>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6>Other data</h6>
+                                #reviews given, #offers made, time on site 
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <h6>Contact</h6>
+                                Address, Email, Phone, Other                                
+                            </div>
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <h6>Verifications</h6>
+                                Verified by site, verified over phone, background check made. 
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6>Review #1</h6>
+                                He was good
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <h6>Review #2</h6>
+                                He was great
+                            </div>
+                            <div class="col-sm-3 col-sm-offset-1">
+                                <h6>Review #3</h6>
+                                Super great! 
+                            </div>
+                        </div>
+</div>
 
         <h2> data of user </h2>
         <user-page class="full-page row">
@@ -22,3 +97,5 @@
       </form>
       <% end %>
       <%= erb :user_reviews, locals: locals %>
+
+</user-page id='userPage'>

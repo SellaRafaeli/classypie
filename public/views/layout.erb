@@ -33,7 +33,7 @@
     <body>
         
         <div class="page-wrapper">      
-            <%= erb :basic_header, locals: locals unless request.path == '/' %>
+            <%= erb :basic_header, locals: locals unless (request.path == '/') %>
             <%= yield %>
         </div> <!-- end page-wrapper -->
 
