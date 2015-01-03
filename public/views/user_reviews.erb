@@ -12,7 +12,7 @@
       <div id="reviewsList">
       <% reviews_of_user.each do |rev| %>
         <div class="col-sm-4">
-            <h6><a href=<%='/user/'+rev.poster._id%>><%= rev.poster && rev.poster.email %></a></h6>
+            <h6><a href=<%=Links.user(rev.poster._id)%>><%= rev.poster && rev.poster.email %></a></h6>
             <%= rev.text * 10 %>
         </div>        
       <% end %>

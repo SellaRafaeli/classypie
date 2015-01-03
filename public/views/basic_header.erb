@@ -14,7 +14,7 @@
                           </li>
                           <% if user_id %>
                           <li>
-                              <a href=<%='/user/'+user_id%> id='currentUserEmail'> <%= user_email %> </a>                                            
+                              <a href=<%=Links.user(user_id, user.name)%> id='currentUserEmail'> <%= user_email %> </a>                                            
                           </li>
                           <li><a href="#" id='logoutBtn' onclick='logout()'>Logout</a></li>
                           <% else %>

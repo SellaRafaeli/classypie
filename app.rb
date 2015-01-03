@@ -43,7 +43,7 @@ def signup_if_new
 end
 
 post '/signup' do
-  user         = Users.create(params)  
+  user         = Users.get({email: params.email}) || Users.create(params)  
   session.user_id = user._id
 end
 

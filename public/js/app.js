@@ -88,7 +88,7 @@ function buildSearchPage(){
 //current user area 
 function signup() {
     var email = prompt('What is your email?');
-    $.post('/signup', {email: email}).success(function(res){ document.location.reload(); }).error(genError)        
+    if (email) $.post('/signup', {email: email}).success(function(res){ document.location.reload(); }).error(genError)        
 }
 
 function logout() {

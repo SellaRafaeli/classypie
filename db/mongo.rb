@@ -38,7 +38,7 @@ class Mongo::Collection
 		doc
 	end
 
-	def one
+	def first
 		self.all[0]
 	end
 
@@ -46,6 +46,12 @@ class Mongo::Collection
 		all = self.all
 		all[all.size-1]
 	end
+
+	def one
+		all = self.all
+		all[rand(all.size)]
+	end
+	alias_method :any, :one
 
 	def update_id(_id, fields)
 		fields.updated_at = Time.now
