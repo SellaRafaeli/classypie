@@ -18,27 +18,28 @@ end
                         <h3>Make an Offer</h3>
                         <form id='newOfferForm'>
                               <input type="hidden" name="listing_id" value='<%= listing._id %>'>
+                              <% unless user_email %>                       
                               <div class="input-group">                        
-                                  <span class="input-group-addon">Who are you?</span>
-                                  <input type="text" name="name" class="form-control" placeholder="Your name">
+                                  <span class="input-group-addon">Name</span>
+                                  <input type="text" name="name" class="form-control" placeholder="Your name (optional)">
                               </div>
 
-                              <div class="input-group">                        
-                                  <span class="input-group-addon">Price (optional)</span>
-                                  <input type="text" name="price" class="form-control" placeholder="How much will you be charging?">
+                              <div class="input-group">                                   
+                                  <span class="input-group-addon">Your Email</span>
+                                  <input type='email' name="email" class="form-control" placeholder='your email' required></input>                                  
                               </div>
-
+                              <% end %>                                                            
                               <div class="input-group">                        
                                   <span class="input-group-addon">Details</span>
-                                  <textarea name="details" class="form-control" placeholder="Convince the customer to pick you! Send a personal message here to the buyer - include your offer, details about you, your personal phone number - whatever you want." style="resize:none" maxlength="280"></textarea>
+                                  <textarea name="details" class="form-control" placeholder="Convince the customer to pick you! Send a personal message here to the buyer - include your offer, details about you, your personal phone number - whatever you want." style="resize:none" maxlength="280" rows=5 required></textarea>
                               </div>
 
                               <div class="input-group">                        
-                                  <span class="input-group-addon">Contact via</span>
-                                  <input name="contact" value='<%= user_email %>' class="form-control" placeholder="your email/phone"></input>
+                                  <span class="input-group-addon">Price</span>
+                                  <input type="text" name="price" class="form-control" placeholder="How much will you be asking? (optional)">
                               </div>
-
-                              <button type='button' class="btn btn-info input-group" onclick='offers.addOffer()' style='width: 100%'>Submit</button>
+                              
+                              <button class="btn btn-info input-group wide">Submit</button>
                         </form>
                     </div>
                     <div class="col-md-3"></div>
@@ -50,12 +51,13 @@ end
                             </div>
 
                             <offers id='offers' class='row features'>
-                    <% (relevant_offers * 5).each do |offer| %>                              
+                    <% (relevant_offers).each do |offer| %>                              
+                      <% user = Users.get(offer.user_id) %>
                             <div class='col-sm-3 offer'>
                                 <img src="../../common-files/icons/Chat@2x.png" alt="" width="100" height="100">
-                                <h6><a href="/user/<%= offer.user_id %>">  <%= "Moshe Bon Jovi Jovi LTD"+' ('+offer.contact+')' %> </a></h6>
-                                <%= offer.details %>                                 
+                                <h6><a href="/user/<%= offer.user_id %>">  <%= user.name.to_s+' ('+user.email.to_s+')' %> </a></h6>
                                 <% if offer.price %> <div>Offered Price: <%= offer.price %></div> <% end %>
+                                <%= offer.details %>                                
                                 <div class='conversation'>
                                   <% Messages.by_offer(offer._id).each do |msg | %>
                                   <%= erb :message, locals: locals.merge({msg: msg, offer: offer}) %>

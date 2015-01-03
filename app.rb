@@ -39,7 +39,7 @@ end
 
 def signup_if_new
   # Should verify email is given and not taken
-  session.user_id = Users.create({email: params.email})._id if !session.user_id 
+  session.user_id = Users.create(params)._id if !session.user_id 
 end
 
 post '/signup' do

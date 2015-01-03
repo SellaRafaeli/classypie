@@ -24,7 +24,7 @@ function buildFormPage(){
         e.preventDefault();
     })
     
-    buildOffers();    
+    
 }
 
 function buildOffers(){
@@ -32,12 +32,10 @@ function buildOffers(){
 
     var newOfferForm = $('#newOfferForm');
 
-    offers.addOffer = function() {
+    newOfferForm.submit(function(){
         var newOffer = newOfferForm.toObj();
-        //newOffer.listing_id = listingID;
-        $.post('/offers/create', newOffer).success(function(res) { 
-            document.location.reload();}).error(genError);
-    }        
+        $.post('/offers/create', newOffer).success(function(res) { document.location.reload();}).error(genError);
+    });    
 
     offers.addMsg = function(elem) {
         var offerID = elem.getAttribute('offer_id');
@@ -55,6 +53,8 @@ function buildListingPage() {
          .success(function(res) { document.location.reload() }).error(genError);
         e.preventDefault();
     });
+
+    buildOffers();    
 }
 
 function buildUserPage() {

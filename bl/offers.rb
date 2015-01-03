@@ -4,6 +4,7 @@ module Offers
   extend self
 
   def create(params)
+    params.email = Users.get(params.user_id).email
     id = $offers.add(params)._id
   end
 

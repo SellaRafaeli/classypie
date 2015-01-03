@@ -61,10 +61,10 @@
                                 </div>
                                 <div id='mainPostForm' class="btns">
                                   <form id='postForm'>
-                                    <input id='pfTitle' type="text" name='title' class="form-control" placeholder='What do you need? Plumber, Babysitter, iPhone, etc'>
-                                    <input id='pfAddress' type="text" name='where' class="form-control autocompleteAddress" placeholder='Where do you need it?'>
+                                    <input id='pfTitle' type="text" name='title' class="form-control" placeholder='What do you need? Plumber, Babysitter, iPhone, etc' required>
+                                    <input id='pfAddress' type="text" name='where' class="form-control autocompleteAddress" placeholder='Where do you need it?' required>
                                     <% unless user_email %>
-                                    <input id='pfContact' type="text" name='email' class="form-control" placeholder='Your email'>
+                                    <input id='pfContact' type="email" name='email' class="form-control" placeholder='Your email' required>
                                     <% end %>
                                     <!-- <a class="btn btn-inverse" href="#">Learn More</a>
                                     <a class="btn btn-danger" href="#">Buy Now for $9</a> -->
@@ -112,14 +112,14 @@
                     <div class="col-sm-6">
                       <form>
                         <label class="h6">Looking for:</label>
-                        <input id='sfTitle' type="text" class="form-control">
+                        <input id='sfTitle' type="text" class="form-control" required>
                         <label class="h6">Where?</label>
-                        <input id='sfAddress' type="text" class="form-control">
+                        <input id='sfAddress' type="text" class="form-control" required>
                         <% unless user_email %>
                         <label class="h6">Your Email</label>
-                        <input id='sfContact' class="form-control">
+                        <input id='sfContact' type='email' class="form-control" required>
                         <% end %>
-                        <button type="button" onclick='$("#postForm").submit()' class="btn btn-primary"><span class="fui-mail"></span>                        
+                        <button type="button" onclick='$("#postForm").submit()' class="btn btn-primary wide">Submit
                         </button>
                       </form>
                     </div>
