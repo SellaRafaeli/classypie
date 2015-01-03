@@ -4,7 +4,8 @@ module Listings
   extend self
 
   def create(params)
-    data = params.merge!({created_at: Time.now, updated_at: Time.now, num_views: 0})
+    #data = params.merge!({created_at: Time.now, updated_at: Time.now, num_views: 0})
+    data = params
     if data.addressDetails
       data.lat = data.addressDetails.lat.to_f
       data.lng = data.addressDetails.lng.to_f
@@ -14,6 +15,11 @@ module Listings
     
     url_title = URI::encode(data.title.gsub(" ","-"))
     {id: id, url_title: url_title}
+  end
+
+  def update(params)    
+    fields = params
+    $listings.update_id(params.listing_id, fields)    
   end
 
   def get(id)

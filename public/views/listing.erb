@@ -11,9 +11,17 @@
                                 <p>Get in touch with professionals regarding your listing. Talk to them anonymously, review their reviews, and negotiate your price.</p>
 
                                 <the-listing>
-                                    <input class='form-control' placeholder='title' value='<%= listing.title %>'>
-                                    <input class='form-control' placeholder='location' value='<%= listing.where %>'>
-                                    <textarea class='form-control' placeholder='details' style='resize: none'></textarea>
+                                    <% if is_owner %>                                    
+                                    <form id='updateListingForm'>
+                                        <input type='hidden' name='listing_id' value='<%=listing._id%>'>
+                                        <input class='form-control' name='title' placeholder='title' value='<%= listing.title %>'>
+                                        <input class='form-control autocompleteAddress' name='where' placeholder='location' value='<%= listing.where %>'>
+                                        <textarea class='form-control' placeholder='details' name='details' style='resize: none'><%= listing.details %></textarea>
+                                        <button class='btn btn-primary' style='width: 100%'>Update</button>
+                                    </form>
+                                    <% else %>
+                                        <%= erb :single_listing, locals: {item: listing} %>
+                                    <% end %>
                                 <the-listing>
                                 
                                 <% if is_owner %> 

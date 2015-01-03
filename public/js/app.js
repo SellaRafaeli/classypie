@@ -3,6 +3,7 @@ function runByURL() {
     var pageName = document.location.pathname.split('/')[1];
     if      (pageName == 'user')    buildUserPage();
     else if (pageName == 'search')  buildSearchPage();
+    else if (pageName == 'listing') buildListingPage();
     else                            buildFormPage();
 }
 
@@ -45,7 +46,15 @@ function buildOffers(){
 }
 
 function buildListingPage() {
-    console.log("In user page");
+    console.log("In listing page");
+
+    $('#updateListingForm').submit(function(e){
+        var data = $(this).toObj();
+        data.addressDetails = window.addressDetails
+        $.post('/listing/update/'+data.listing_id,data)
+         .success(function(res) { document.location.reload() }).error(genError);
+        e.preventDefault();
+    });
 }
 
 function buildUserPage() {

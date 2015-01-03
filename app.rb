@@ -69,6 +69,10 @@ post '/listing/create' do
   res.id+'/'+res.url_title
 end
 
+post '/listing/update/:id' do 
+  res = Listings.update(params)
+end
+
 post '/offers/create' do
   signup_if_new
   Offers.create(params.merge!(user_ids))

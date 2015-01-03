@@ -33,6 +33,7 @@ class Mongo::Collection
 
 	def add(doc)
 		doc[:_id] = nice_id
+		doc[:created_at] = Time.now
 		self.insert(doc)
 		doc
 	end
@@ -47,6 +48,7 @@ class Mongo::Collection
 	end
 
 	def update_id(_id, fields)
+		fields.updated_at = Time.now
 		self.update({_id: _id}, '$set' => fields)		
 	end
 end

@@ -90,5 +90,5 @@ function syncInput(orig,follower) {
 function syncTwoInputs(a,b) { 
     syncInput(a,b);
     syncInput(b,a);
-    console.log("ok, synced", a, b);
+    //console.log("ok, synced", a, b);
 }
