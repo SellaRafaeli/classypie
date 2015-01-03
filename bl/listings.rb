@@ -22,44 +22,47 @@ module Listings
 
   ## 
 
-  def gen_search(crit)
-   $listings.find(crit).to_a
+  def find_by(crit)
+   $listings.find_by(crit).to_a
   end
 
-  def search(term, lat, lng) 
+  def search(term, lat = nil, lng = nil) 
+    crit = build_search_crit(term, lat, lng)    
+    $listings.find(crit).to_a;
+  end
+
+  def build_search_crit(term, lat, lng)    
     reg = Regexp.new(term)
     lat, lng = lat.to_f, lng.to_f
-    
-    $listings.find( { lat: { '$gt' => lat-10, '$lt' => lat+10 },
-                      lng: { '$gt' => lng-10, '$lt' => lng+10 },
-                      :$or => [{title: reg}, {details: reg}]
-                    } ).to_a;
 
+    crit = {:$or => [{title: reg}, {details: reg}]}
+    crit.lat = { '$gt' => lat-10, '$lt' => lat+10 } if lat > 0
+    crit.lng = { '$gt' => lng-10, '$lt' => lng+10 } if lng > 0
+    crit    
   end
-
 
   ## Listings.search_by_content_and_loc('plumber', '')
   ## Listings.search_by_content_and_loc('', 'Haifa')
-  def search_by_content_and_loc(content_keyword, location_keyword = nil) 
-    crits = [content_crit(content_keyword)]
-    crits.push(location_crit(location_keyword)) if location_keyword
-    search({:$and => crits })        
-  end
+  # def search_by_content_and_loc(content_keyword, location_keyword = nil) 
+  #   crits = [content_crit(content_keyword)]
+  #   crits.push(location_crit(location_keyword)) if location_keyword
+  #   search({:$and => crits })        
+  # end
 
-  def content_crit(content_keyword)
-    reg = Regexp.new(content_keyword)
-    content_crit = {:$or => [{title: reg}, {details: reg}]}
-  end
+  # def content_crit(content_keyword)
+  #   reg = Regexp.new(content_keyword)
+  #   content_crit = {:$or => [{title: reg}, {details: reg}]}
+  # end
 
-  def location_crit(location_keyword)
-    reg = Regexp.new location_keyword
-    location = {
-            :$or => [{:where => reg}, 
-                     {'addressDetails.route' => reg},
-                     {'addressDetails.locality' => reg}, 
-                     {'addressDetails.administrative_area_level_1' => reg},           
-                     {'addressDetails.country' => reg},
-                    ]
-                }
-  end
+  # def location_crit(location_keyword)
+  #   reg = Regexp.new location_keyword
+  #   location = {
+  #           :$or => [{:where => reg}, 
+  #                    {'addressDetails.route' => reg},
+  #                    {'addressDetails.locality' => reg}, 
+  #                    {'addressDetails.administrative_area_level_1' => reg},           
+  #                    {'addressDetails.country' => reg},
+  #                   ]
+  #               }
+  # end
 end

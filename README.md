@@ -32,31 +32,12 @@ Next steps:
     - show user image in offer
     - make nicer 'us/them' - CHECK
 - user-page:
-  - data that interests us:
-    basic data:
-      main photo
-      description      
-      total score
-
-      address
-      facebook page
-      web page
-      number of reviews received
-      
-      number of reviews given (?) 
-      number of offers made (?)
-      bonuses (identity verified?)
-    - time on site
-      email
-      phone
-    - more photos 
-    - read the reviews 
-  - enable setting of image for user
-  - show reviews in a nicer way
+    - make image (by link) work 
 - search-page:
   - make general design 
 - general: 
   - add contact-us page
+  - add how-does-it-work page (and section to index)
 
 Todo someday: 
 - Signup with FB, Gmail, Twitter, GitHub

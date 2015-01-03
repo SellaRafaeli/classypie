@@ -95,14 +95,11 @@ end
 
 get '/search/?:content?/?:location?' do 
   data = locals.merge(params)
-
-  if params.content && params.location 
-    params.lat, params.lng = Search.coordinates(params)
-    data.listings = Listings.search(params.content,params.lat,params.lng)
-  else
-    data.listings = []
-  end
-
+  params.lat, params.lng = Search.coordinates(params) if params.location  
+  
+  data.listings = []  
+  data.listings = Listings.search(params.content,params.lat,params.lng) if params.content
+    
   erb :search, layout: :layout, locals: data
 end
 

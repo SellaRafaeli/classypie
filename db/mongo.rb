@@ -41,6 +41,11 @@ class Mongo::Collection
 		self.all[0]
 	end
 
+	def last 
+		all = self.all
+		all[all.size-1]
+	end
+
 	def update_id(_id, fields)
 		self.update({_id: _id}, '$set' => fields)		
 	end

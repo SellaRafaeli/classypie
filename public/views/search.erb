@@ -1,11 +1,63 @@
-<h1>Search</h1>
+<search id="search">
+<section class="header-6-sub">
+        <div class="background">&nbsp;</div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <h3>Find what people are looking for.</h3>
+              <div class="row">
+                <p class="lead col-sm-10 col-sm-offset-1">
+                  Your next customer is waiting.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+              <div class="signup-form">
+                <!-- <form>
+                  <div class="clearfix">                  
+                    <input type="text" class="form-control" placeholder="Your E-mail">
+                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Confirmation">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                  </div>
+                </form>  -->
+                <form id='searchForm' method='get' action='/searchValues/'>
+                  <div class="clearfix">                  
+                  <input type='text' name='content' class='form-control' value='<%= content=content || nil %>' placeholder='Keyword'>
+                  <input type='text' name='location' class='form-control autocompleteAddress' value='<%= location=location || nil%>' placeholder='Where?'>
+                  <button class='btn btn-primary'>Search</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <form id='searchForm' method='get' action='/searchValues/'>
-    <input type='text' name='content' value='<%= content=content || nil %>'>
-    <input type='text' name='location' class='autocompleteAddress' value='<%= location=location || nil%>'>
-    <button>Submit</button>
-  </form>
+      <% if listings.any? %>
+      <section id='foundListings' class="content-2">
+              <div class="container">
+                <% listings.each do |item| %>
+                  <% 
+                    link = '/listing/'+item._id
+                    user = Users.get(item.user_id)
+                    email = user.email
+                  %> 
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h3><%= item.title %></h3>
+                      <% if item.details %> <p><%= item.details %> </p><% end%>
+                      
+                      <div class="btns">
+                        <a class="btn btn-primary" href="<%='/users/'+item.user_id%>"><%= email %></a>
+                        <a href="<%=link%>"><b><%= item.where+' / '+item.created_at.to_s %></b></a>                        
+                      </div>
+                    </div>
+                  </div>
+                <% end %>                
+              </div>
+      </section>      
+      <% end %>
 
-  <% listings.each do |item| %>
-    <div> <%= item.to_json %> </div>
-  <% end %>
+</search>
