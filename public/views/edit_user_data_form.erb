@@ -1,0 +1,28 @@
+<section>
+<h3> Edit your profile</h3>
+<form id='editUserDataForm'>
+  <label>Name</label>
+  <input class='form-control' type='text' name='name' value='<%= target_user.name %>'>
+  
+  <label>Description</label>
+  <input class='form-control' type='text' name='desc' value='<%= target_user.desc %>'>
+
+<!--   <label>Image (link)</label>
+  <input class='form-control' type='text' name='img' value='<%= target_user.img %>'>
+ -->
+ 
+  <label>Email</label>
+  <input class='form-control' type='text' name='email' value='<%= target_user.email %>'>
+
+  <label>Phone</label>
+  <input class='form-control' type='text' name='phone' value='<%= target_user.phone %>'>
+
+  <label>Website</label>
+  <input class='form-control' type='text' name='website' value='<%= target_user.website %>'>
+  
+  <label>Facebook Page</label>
+  <input class='form-control' type='text' name='fb_page' value='<%= target_user.fb_page %>'>
+
+  <button class='btn btn-primary wide'>Submit</button>
+</form>
+</section end-edit-profile>

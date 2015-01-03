@@ -1,0 +1,16 @@
+<% 
+  link = '/listing/'+item._id
+  user = Users.get(item.user_id)
+  email = user.email
+%> 
+
+<div class="row singleListing">
+  <div class="col-sm-12">
+    <h3><%= item.title %></h3>
+    <% if item.details %> <p><%= item.details %> </p><% end%> 
+    <div class="btns">
+      <a class="btn btn-primary" href="<%='/users/'+item.user_id%>"><%= email %></a>
+      <a href="<%=link%>"><b><%= item.where+' / '+item.created_at.to_s %></b></a>                        
+    </div>
+  </div>
+</div>
