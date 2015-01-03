@@ -54,7 +54,10 @@ props = prop_title.merge(prop_text).keys
 
                     <% if user && target_user._id == user._id %>
                         <%= erb :edit_user_data_form, locals: locals %> 
-                    <% end %>
+
+                        <% locals.listings = Listings.find_by({user_id: user_id}) %>
+                        <%= erb :user_listings, locals: locals %>
+                    <% end %>                    
                     </div end-container>
 </div>
 

@@ -35,14 +35,6 @@
         </div>
       </section>
 
-      <% if listings.any? %>
-      <section id='foundListings' class="content-2">
-              <div class="container">
-                <% listings.each do |item| %>
-                  <%= erb :single_listing, locals: {item: item} %>
-                <% end %>                
-              </div>
-      </section>      
-      <% end %>
+      <%= erb :many_listings, locals: locals %> 
 
 </search>

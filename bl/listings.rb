@@ -29,7 +29,7 @@ module Listings
   ## 
 
   def find_by(crit)
-   $listings.find_by(crit).to_a
+   $listings.find(crit).to_a
   end
 
   def search(term, lat = nil, lng = nil) 
