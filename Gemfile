@@ -15,3 +15,4 @@ gem 'activesupport',      	'4.0.0' # utility functions like hash.slice
 #gem 'bower',                '0.0.2' # for frontend asset management
 gem 'require_all'
 gem 'httpclient'
+gem 'pony'                            # emails

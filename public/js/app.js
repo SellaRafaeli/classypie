@@ -24,7 +24,30 @@ function buildFormPage(){
         e.preventDefault();
     })
     
-    
+    var w = window;
+
+    w.onTaken = function() {
+        $('#goToEmailBtn').toggleClass('hide');
+    }
+
+    //current user area 
+    w.signup = function() {
+        var email = prompt('What is your email?')
+        if (email) $.post('/signup', {email: email}).success(function(res){ 
+            if (res=='ok') document.location.reload();
+            else if (res=='taken') {
+                var msg = 'Please click confirmation link sent to your email: '+email+'. Go to gmail.com now?';
+                if (confirm(msg)) document.location.href = 'http://www.gmail.com';
+            }
+            else alert ('Error: '+res);
+        }).error(genError)
+
+        return event.preventDefault() && false;        
+    }
+
+    w.logout = function() {
+        $.post('/logout').success(function(res){ document.location.reload(); }).error(genError);
+    }
 }
 
 function buildOffers(){
@@ -83,16 +106,6 @@ function buildSearchPage(){
 
         return false;
     });    
-}
-
-//current user area 
-function signup() {
-    var email = prompt('What is your email?');
-    if (email) $.post('/signup', {email: email}).success(function(res){ document.location.reload(); }).error(genError)        
-}
-
-function logout() {
-    $.post('/logout').success(function(res){ document.location.reload(); }).error(genError);
 }
 
 // current_user = {};

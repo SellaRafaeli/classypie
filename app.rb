@@ -15,6 +15,8 @@ require './settings'
 require './db/mongo'
 require_all './bl'
 require_all './middleware'
+require_all './comm'
+
 # require './users/user'
 # require './users/users_api'
 
@@ -43,8 +45,10 @@ def signup_if_new
 end
 
 post '/signup' do
-  user         = Users.get({email: params.email}) || Users.create(params)  
+  return 'taken' if Users.get({email: params.email})
+  user         =  Users.create(params)  
   session.user_id = user._id
+  'ok'
 end
 
 get '/me' do
@@ -109,7 +113,5 @@ end
 
 get '/ping' do
 	{msg: 'pong'}
-end
-	
-puts "Ready to rock".light_red
-
+end	
+#puts "Ready to rock".light_red

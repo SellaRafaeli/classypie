@@ -3,12 +3,15 @@ tg = target_user
 tg.email ||= tg.contact
 
 locals.reviews_of_user = reviews_of_user = Reviews.of_target(tg._id)
+locals.listings = listings = Listings.find_by({user_id: user_id})
+
 prop_title = {
     name: 'Name',
     #img: 'Main Photo',
     desc: 'Description',
     total_score: 'Total Score',
     num_reviews: 'Reviews Count',    
+    #num_listings: 'Listings Count',
     website: 'Website',
     fb_page: 'FB page',
     email: 'Email',
@@ -19,6 +22,7 @@ prop_text = { #or mkup
     #img: '<img src="'+tg.img+'">',
     total_score: 10+20,
     num_reviews: reviews_of_user.size.to_s+' reviews',
+    #num_listings: listings.size.to_s+' listings',
     website: "<a target='_blank' href=#{tg.website}>#{tg.website}</a>",
     fb_page: "<a target='_blank' href=#{tg.fb_page}>#{tg.fb_page}</a>" 
 }
@@ -55,7 +59,6 @@ props = prop_title.merge(prop_text).keys
                     <% if user && target_user._id == user._id %>
                         <%= erb :edit_user_data_form, locals: locals %> 
 
-                        <% locals.listings = Listings.find_by({user_id: user_id}) %>
                         <%= erb :user_listings, locals: locals %>
                     <% end %>                    
                     </div end-container>
