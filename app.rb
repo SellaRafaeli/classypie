@@ -50,7 +50,6 @@ end
 post '/signup' do
   email = params.email
   if Users.get({email: email })
-    bp
     guid = AuthLinks.get_guid(email)
     Emails.send_entry_link(email, guid)
     return 'taken' 

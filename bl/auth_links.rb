@@ -8,7 +8,7 @@ $auth_links.ensure_index(:guid)
 module AuthLinks
   extend self
 
-  def guid
+  def make_guid
     SecureRandom.uuid + '-' + SecureRandom.uuid
   end
 
@@ -18,6 +18,7 @@ module AuthLinks
   # end
 
   def get_guid(email)
+    guid = make_guid
     fields = {guid: guid}
     $auth_links.update({email: email}, {'$set' => fields}, {upsert: true})   
     return guid
