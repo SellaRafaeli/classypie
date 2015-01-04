@@ -1,9 +1,17 @@
 include Mongo
 
+# Production environment will have the MONGOLAB_URI and related variables set.
+DEFAULT_MONGODB_DB_NAME = "classypie"
+set :mongodb_db_name, ENV["MONGOLAB_DB_NAME"] || DEFAULT_MONGODB_DB_NAME
+
+DEFAULT_MONGODB_URI = "mongodb://localhost:27017/#{settings.mongodb_db_name}"
+set :mongodb_uri,     ENV["MONGOLAB_URI"]     || DEFAULT_MONGODB_URI
+
 # Instantiate and connect to the production MongoLab database if production, or
 # a local instance if development.
 $mongo = CONN = MongoClient.from_uri(settings.mongodb_uri).db(settings.mongodb_db_name)
 puts "Running against MongoDB: #{settings.mongodb_uri} db:#{settings.mongodb_db_name}"
+
 
 # Custom methods to make dealing with Mongo object ids easier.
 # Some ruby/mongo hacking here. 

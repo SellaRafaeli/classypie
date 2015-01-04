@@ -16,5 +16,4 @@ end
 # The following are exposed globally via $varname.
 $app_name   = 'classyPie1'
 $prod       = settings.production?
-
-require './db/settings'
+$root_url   = 'http://localhost:9292'

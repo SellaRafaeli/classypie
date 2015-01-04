@@ -13,6 +13,10 @@ module Users
     $users.get(id)
   end
 
+  def get_by_email(email)
+    $users.find_one({email: email})
+  end
+
   def update(params)    
     fields = params.just(SETTABLE_USER_FIELDS)
     $users.update_id(params.user_id, fields)    

@@ -10,12 +10,15 @@ require 'securerandom'
 Bundler.require
 
 # our app files - export to separate require.rb file when grows out of hand
+
 require './lib/mylib'
+require './secret_config'
 require './settings'
 require './db/mongo'
 require_all './bl'
 require_all './middleware'
 require_all './comm'
+
 
 # require './users/user'
 # require './users/users_api'
@@ -45,7 +48,14 @@ def signup_if_new
 end
 
 post '/signup' do
-  return 'taken' if Users.get({email: params.email})
+  email = params.email
+  if Users.get({email: email })
+    bp
+    guid = AuthLinks.get_guid(email)
+    Emails.send_entry_link(email, guid)
+    return 'taken' 
+  end
+
   user         =  Users.create(params)  
   session.user_id = user._id
   'ok'
@@ -61,6 +71,19 @@ end
 
 get '/' do 
   erb :index, layout: :layout, locals: locals
+end
+
+get '/auth_link' do
+  email = params.email
+  guid  = params.guid
+  if authed_user = AuthLinks.get_by_email_and_guid(email, guid)
+    user = Users.get_by_email(email)
+    user_id = user._id
+    session.user_id = user._id
+    redirect to('/')
+  else  
+    erb :index, layout: :layout, locals: locals
+  end
 end
 
 get '/listing/:listing_id/?:name?' do  
@@ -105,8 +128,7 @@ get '/search/?:content?/?:location?' do
   data = locals.merge(params)
   params.lat, params.lng = Search.coordinates(params) if params.location  
   
-  data.listings = []  
-  data.listings = Listings.search(params.content,params.lat,params.lng) if params.content
+  data.listings = params.content ? Listings.search(params.content,params.lat,params.lng) : []
     
   erb :search, layout: :layout, locals: data
 end
