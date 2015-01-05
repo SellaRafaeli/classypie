@@ -12,13 +12,11 @@
                         <ul class="nav pull-left">
                           <li><a href="/">HOME</a>
                           </li>
-                          <% if user_id %>
-                          <li>
-                              <a href=<%=Links.user(user_id, user.name)%> id='currentUserEmail'> <%= user_email %> </a>                                            
-                          </li>
-                          <li><a href="#" id='logoutBtn' onclick='logout()'>Logout</a></li>
+                          <% if user %>
+                            <li><%= erb :user_link, locals: {user: user} %></li>
+                            <li><a href="#" id='logoutBtn' onclick='logout()'>Logout</a></li>
                           <% else %>
-                          <li><a href="#" id='loginBtn' onclick='signup()'>Login/Sign Up</a></li>                                        
+                            <li><a href="#" id='loginBtn' onclick='signup()'>Login/Sign Up</a></li>
                           <% end %>
                         </ul>
                         <!-- <form class="navbar-form pull-left">

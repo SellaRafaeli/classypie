@@ -17,3 +17,4 @@ module Search
   alias_method :coordinates, :google_coordinates_by_address
 
 end
+

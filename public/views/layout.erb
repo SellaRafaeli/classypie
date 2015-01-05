@@ -35,6 +35,7 @@
         <div class="page-wrapper">      
             <%= erb :basic_header, locals: locals unless ['/','/auth_link'].include?(request.path) %>
             <%= yield %>
+            <%= erb :footer, locals: locals %>
         </div> <!-- end page-wrapper -->
 
         <!-- Placed at the end of the document so the pages load faster -->
