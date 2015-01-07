@@ -6,6 +6,7 @@ module Users
   extend self
 
   def create(params)
+    return 'taken' if params.email && $users.find_one({email: params.email})
     $users.add(params)  
   end
 

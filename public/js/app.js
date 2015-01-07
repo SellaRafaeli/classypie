@@ -20,7 +20,11 @@ function buildFormPage(){
     
     form.submit(function(e) {               
         $.post('/listing/create', getFormData())
-         .success(function(res) { document.location.href = '/listing/'+res} ).error(genError);
+         .success(function(res) { 
+            if (res=='taken') return alert('Email is taken - please login first.');
+            document.location.href = '/listing/'+res;
+        }).error(genError);
+
         e.preventDefault();
     })
     

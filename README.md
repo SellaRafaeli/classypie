@@ -1,4 +1,4 @@
-ClassyPie is a platform to connect local buyers and sellers. 
+ClassyPie is a platform to connect local buyers and sellers.
 
 ## Installation
 
@@ -16,14 +16,15 @@ Prerequisites - MongoDB.
 2. When viewing a listing, you can post an offer if your are not the listing owner and. If you have already posted an offer, you will see only your offer. Listing owner sees all offers. 
 3. Buyer (listing poster) and Seller (offer poster) can write messages to each other via the offer posted. (And/or trade emails and continue conversation via email).
 
-Next steps:
+Tickets:
 - homepage:
-  - make bottom form work - CHECK
+  - make bottom form sync with top, including google address (make sure submitting bottom works with lat/lng) 
   - make bottom map sync with address 
-  - form validation
+  - form validation (don't submit if fields missing)
+  - if email already taken, prompt saying so and ask whether to send sign-in link to that mail, if so - do so. 
   - add footer 
 - listing-page:
-  - remove extra whitespace - CHECK 
+  - make 'we are looking for sellers for you' nice
   - support updating of listing for buyer
   - disable editing of listing for non-buyer
   - make nicer 'working on it' partial
@@ -32,6 +33,8 @@ Next steps:
     - show user image in offer
     - make nicer 'us/them' - CHECK
 - user-page:
+    - give place to sign-up for words and location
+    - make listings that match any user send to his email 
     - make image (by link) work 
 - search-page:
   - make general design 

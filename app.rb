@@ -42,9 +42,12 @@ def user_ids
   {user_id: session.user_id}
 end
 
-def signup_if_new
-  # Should verify email is given and not taken
-  session.user_id = Users.create(params)._id if !session.user_id 
+def signup_if_new  
+  if !session.user_id
+    new_user = Users.create(params)
+    res = (new_user == 'taken') ? 'taken' : session.user_id = new_user._id 
+    return res
+  end     
 end
 
 post '/signup' do
@@ -90,7 +93,8 @@ get '/listing/:listing_id/?:name?' do
 end
 
 post '/listing/create' do 
-  signup_if_new
+  res = signup_if_new
+  return res if res == 'taken' 
   res = Listings.create(params.merge!(user_ids))
   res.id+'/'+res.url_title
 end
